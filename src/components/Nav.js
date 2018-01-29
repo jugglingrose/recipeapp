@@ -6,10 +6,15 @@ class Nav extends React.Component {
       <div>
           <nav className="navBar">
             <div className="navbar-header">
-              <a className="navbar-brand" href="#">Recipe App</a>
+              <ul>
+                <li>
+                  <a className="navbar-brand" href="#">Recipe App</a>
+                </li>
+              </ul>
             </div>
             <div className="navbar-nav">
 
+            <div class="desktop-nav">
               <ul>
                 <li>ADD RECIPE</li>
                 <li>
@@ -25,13 +30,14 @@ class Nav extends React.Component {
                   </form>
                 </li>
               </ul>
-          
+            </div>
 
+            <div class="perm-nav">
               <ul>
                 <li className="settings"><i className="fa fa-cog"></i></li>
               </ul>
             </div>
-
+            </div>
           </nav>
         </div>
     )
