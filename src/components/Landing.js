@@ -1,18 +1,8 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import Synopsis from './Synopsis';
-import Add from './Add';
-
-import { Route } from 'react-router-dom';
-
-/*import PropTypes from 'prop-types';*/
 
 class Landing extends React.Component{
-
-  goToAdd() {
-    console.log("you are going to the add recipe page");
-    /*this.context.router.transitionTo(`/add`);*/
-  }
 
   render(){
     return(
@@ -39,7 +29,7 @@ class Landing extends React.Component{
           </Row>
           <Row>
             <Col xs="12" md={{ size: 10, offset: 1}} lg={{ size: 6, offset: 3}} className="text-center">
-              <button type="button" className="add-btn" onClick={this.goToAdd}>ADD</button>
+              <a href="/add"><button type="button" className="add-btn">ADD</button></a>
             </Col>
           </Row>
           <Synopsis />
@@ -49,8 +39,5 @@ class Landing extends React.Component{
   }
 }
 
-/*Landing.PropTypes= {
-	router: React.PropTypes.object
-}*/
 
 export default Landing;

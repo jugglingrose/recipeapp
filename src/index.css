@@ -1,7 +1,58 @@
+/* FONTS */
+@font-face {
+font-family: "playfair";
+src: url("./assets/font/playfairdisplay-regular-webfont.eot");
+src:
+url("./assets/font/playfairdisplay-regular-webfont.woff") format("woff"),
+url("./assets/font/playfairdisplay-regular-webfont.woff2") format("woff2"),
+url("./assets/font/playfairdisplay-regular-webfont.ttf") format("truetype"),
+url("./assets/font/playfairdisplay-regular-webfont.svg") format("svg");
+}
+
+
+@font-face {
+font-family: "playfairB";
+src: url("./assets/font/playfairdisplaysc-bold-webfont.eot");
+src:
+url("./assets/font/playfairdisplay-regular-webfont.woff") format("woff"),
+url("./assets/font/playfairdisplaysc-bold-webfont.eot") format("woff2"),
+url("./assets/font/playfairdisplaysc-bold-webfont.ttf") format("truetype"),
+url("./assets/font/playfairdisplaysc-bold-webfont.svg") format("svg");
+}
+
+@font-face {
+font-family: "garamond";
+src: url("./assets/font/ebgaramond-regular-webfont.eot");
+src:
+url("./assets/font/ebgaramond-regular-webfont.woff") format("woff"),
+url("./assets/font/EBGaramond-Regular.ttf") format("truetype"),
+url("./assets/font/ebgaramond-regular-webfont.svg") format("svg");
+}
+
+body{
+  font-family: "playfair" !important;
+  height: 100%;
+  position: relative;
+}
+
+h1, h2{
+  font-family: "playfair";
+}
+
+p{
+  font-family: "garamond";
+  font-size: 18px;
+}
+
 .row{
   width: 100%;
   margin: 0px !important;
 }
+
+.content {
+   min-height: 90vh; /* will cover the 100% of viewport */
+}
+
 /*---------------------------------------------------*/
 /* NAVBAR COMPONENT */
 

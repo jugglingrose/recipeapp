@@ -7,7 +7,7 @@ class Nav extends React.Component {
             <div className="navbar-header">
               <ul>
                 <li>
-                  <a className="navbar-brand" href="#">Recipe App</a>
+                  <a className="navbar-brand" href="/">Recipe App</a>
                 </li>
               </ul>
             </div>
@@ -15,7 +15,7 @@ class Nav extends React.Component {
 
             <div className="desktop-nav">
               <ul>
-                <li>ADD RECIPE</li>
+                <a href="/add"><li>ADD RECIPE</li></a>
                 <li>
                   <form className="navbar-form" action="#">
                     <div className="input-grp">
