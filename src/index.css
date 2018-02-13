@@ -1,9 +1,7 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+.row{
+  width: 100%;
+  margin: 0px !important;
 }
-
 /*---------------------------------------------------*/
 /* NAVBAR COMPONENT */
 
@@ -26,7 +24,8 @@ body {
   color: #ffffff;
 }
 
-.navbar-nav{
+
+.navbar-navigation{
   display: inline-block;
   float: right;
   max-height: 50px;
@@ -73,7 +72,7 @@ i.fa.fa-cog::before{
 }
 
 .desktop-nav{
-  display: inline-block;
+  display: none;
   font-size: 18px;
   padding-top: 3px;
 }
@@ -81,4 +80,375 @@ i.fa.fa-cog::before{
 .perm-nav{
   display: inline-block;
   float: right;
+}
+
+
+
+
+/*-------------------------------------------------------------*/
+/* LANDING */
+
+.search-group{
+  border: 1px solid gray;
+  border-radius: 20px;
+  margin-top: 2px;
+  font-size: 16px;
+}
+
+.input-group-button{
+  display: inline-block;
+}
+
+i.fa.fa-search::before{
+  font-size: 18px;
+  color: #ff960e;
+}
+
+.recipe-desc{
+  font-size: 16px;
+  color: #ff960e;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+.add-btn{
+    height: 28px;
+    background: #ff960e;
+    color: #ffffff;
+    margin: 10px 0;
+    border-radius: 20px;
+    font-size: 16px;
+    width: 100px;
+  }
+
+.summary-title{
+  background-color: #ff960e;
+  height: 50px;
+  color: #ffffff;
+}
+
+.summary-title h2{
+  margin: 0px;
+  font-size: 24px;
+  padding-top: 13px;
+  padding-left: 10px;
+}
+
+
+.summary p{
+  border: .5px solid gray;
+  padding-left: 10px;
+  display: block; /* Fallback for non-webkit */
+  display: -webkit-box;
+  max-width: 100%;
+  margin: 0 auto;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btm-margin{
+  margin-bottom: 10px;
+}
+
+/*-------------------------------------------------------------*/
+/* ADD RECIE PAGE */
+
+.img-upload{
+  height: 260px;
+  padding-top: 82px;
+  text-align: center;
+  display: none;
+}
+
+i.fa.fa-camera::before{
+  font-size: 72px;
+}
+
+.add-input, div.inst-grp, .desc-input{
+  background-color: rgba(255,150,14,.25);
+  width: 100%;
+  margin-top: 10px;
+}
+
+textarea{
+  width: 100%;
+  background-color: transparent;
+  resize: none !important;
+  padding-left: 10px;
+}
+
+#add-recipe-page input{
+  height: 30px;
+  padding-left: 10px;
+}
+#add-recipe-page input, textarea{
+  border: none;
+}
+
+::placeholder{
+  color: black;
+}
+
+.ing-form{
+  background-color: rgba(255,150,14,.25);
+  margin-top: 10px;
+}
+
+.ing-input{
+  width: 100%;
+}
+
+.ing-input input{
+  width: 91%;
+  background-color: transparent;
+}
+
+.ing-btn{
+  width: 7%;
+}
+
+.instruct-btn-grp{
+  width: 99.5%;
+  height: 29px;
+  padding-left: 10px;
+}
+
+.del{
+  float: right;
+}
+
+.input-group-button button{
+  background-color: transparent;
+  border: none;
+}
+
+/*-------------------------------------------------------------*/
+/* RECIPE SYNOPSIS PAGE */
+
+.recipe-img img{
+  width: 100%;
+  object-fit: cover;
+}
+
+.ing-list ul{
+  list-style-type: none;
+  padding: 0px;
+  width: 49%;
+  display: inline-block;
+  font-family: "garamond";
+  font-size: 18px;
+}
+
+.list-ing-1{
+  float: left;
+}
+
+.list-numbers{
+  padding: 0px;
+  margin: 0px;
+  list-style-type: none;
+}
+
+.list-numbers li {
+    counter-increment: step-counter;
+    margin-bottom: 20px;
+}
+.list-numbers li::before{
+  content: counter(step-counter);
+  margin-right: 5px;
+  font-size: 32px;
+}
+
+.list-numbers span{
+  font-size: 18px;
+}
+
+/*-------------------------------------------------------------*/
+/* LOGIN PAGE */
+
+#login-page{
+  background-color: #ff960e;
+}
+
+#login-page input{
+  width: 100%;
+  padding-left: 10px;
+}
+
+#login-page .add-btn{
+  background-color: #ffffff;
+  color: #ff960e;
+}
+
+#login-page h1, #login-page p{
+  color: #ffffff;
+}
+
+#login-page p{
+  margin-bottom: 0px;
+  margin-top: 10px;
+}
+
+#login-page h1{
+  font-size: 48px;
+}
+
+.login-contain{
+  /*padding-top: 20vh;*/
+  height: 100vh;
+}
+
+
+/*-------------------------------------------------------------*/
+/* FOOTER */
+.foot{
+  background-color: #ff960e;
+  color: #ffffff;
+  height: 60px;
+  position: absolute;
+  bottom: 0;
+}
+
+.foot p{
+  margin-top: 16.5px;
+  margin-bottom: 16.5px;
+}
+
+/*-------------------------------------------------------------*/
+/*-------------------------------------------------------------*/
+/* TABLETS */
+
+@media screen and (min-width: 480px){
+  /* NAVBAR COMPONENT */
+  .desktop-nav{
+    display: inline-block;
+  }
+
+  nav input{
+    width: 100px;
+  }
+
+  /*-------------------*/
+  /* LANDING */
+  .search-group{
+    display: none;
+  }
+
+  .recipe-desc{
+    font-size: 25px;
+    margin-top: 20px;
+    margin-bottom: 0px;
+  }
+
+  .add-btn{
+    margin: 20px 0;
+  }
+
+  .btm-margin{
+    margin-bottom: 20px;
+  }
+
+  /*-------------------*/
+  /* ADD RECIPE PAGE */
+
+  .ing-input{
+    margin-top: 20px;
+  }
+
+  .ing-input input{
+    width: 94%;
+  }
+
+  .ing-btn{
+    width: 3.5%;
+  }
+
+  .add-input, div.inst-grp, .desc-input{
+    margin-top: 20px;
+  }
+
+  /*-------------------*/
+  /* LOGIN PAGE */
+
+  #login-page p{
+    margin-top: 20px;
+  }
+
+  /*-------------------*/
+  /* FOOTER */
+
+}
+
+/*-------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+/* DESKTOP */
+
+@media only screen and (min-width: 780px){
+  /*NAV COMPONENT */
+  .desktop-nav li {
+    padding-right: 20px;
+  }
+
+  nav input{
+    width: 160px;
+  }
+  /*-------------------*/
+  /* ADD RECIPE PAGE */
+
+  .ing-input input{
+    width: 96%;
+  }
+
+  .ing-btn{
+    width: 2%;
+  }
+
+  /*-------------------*/
+  /* LOGIN PAGE */
+
+  .login-contain{
+    /*padding-top: 25vh;*/
+  }
+}
+
+/*-------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+@media only screen and (min-width: 980px){
+  .ing-input input{
+    width: 93%;
+  }
+}
+
+/*-------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+@media only screen and (min-width: 1250px){
+  .ing-input input{
+    width: 96%;
+  }
+}
+
+
+/*-------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+/* IPAD PRO */
+
+@media only screen and (min-device-width : 1024px) and (max-device-width : 1024px)
+and (min-device-height : 1366px) and (max-device-height : 1366px)
+and (min-width: 1024px) and (max-width: 1024px)
+{
+  /*-------------------*/
+  /* ADD RECIPE PAGE */
+    .ing-btn{
+      width: 4%;
+    }
+
+    /*-------------------*/
+    /* LOGIN PAGE */
+
+    .login-contain{
+      /*padding-top: 25vh;*/
+    }
+
 }
