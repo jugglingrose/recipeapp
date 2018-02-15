@@ -6,30 +6,30 @@ class Add extends React.Component{
   constructor(){
 	   super();
 	    this.createRecipe = this.createRecipe.bind(this);
-      this.state = {
-        title: '',
-        ingredients: [{ name: '' }],
-      };
 
     }
 
-  createRecipe(){
-    console.log('creating new recipe');
-    /*const recipe = {
-      title: this.title.value,
-      time:  this.time.value,
-      ingredient:  this.ingredient.value,
-      instruction: this.instruction.value,
-    }*/
-  
-  }
+    createRecipe(){
+      console.log('creating new recipe');
+      const recipe = {
+        title: this.title.value,
+        time:  this.time.value,
+        description: this.description.value,
+        ingredient:  this.ingredient.value,
+        instruction: this.instruction.value,
+      }
+      console.log(recipe);
+      this.props.addRecipe(recipe);
+      this.form.reset();
+    }
+
 
   render(){
     return(
       <div id="add-recipe-page">
         <div className="content">
           <Container fluid={true}>
-            <form>
+            <form ref={(input) => this.form = input}>
             <Row>
               <Col xs="12" lg={{ size: 6, offset: 3}}>
                 <div className="img-upload">
@@ -41,26 +41,11 @@ class Add extends React.Component{
             <Row>
               <Col xs="12" lg={{ size: 6, offset: 3}}>
                 <div className="add-form-group">
-                  <input type="text" ref={(input) => { this.title = input }} className="add-input" name="recipe-title" placeholder="Recipe Title"></input>
+                  <input type="text"  ref={(input) => { this.title= input }} className="add-input" name="recipe-title" placeholder="Recipe Title"></input>
                   <input type="text" ref={(input) => { this.time = input }} className="add-input" name="cook-time" placeholder="Total Cook Time"></input>
-                  <textarea className="desc-input" name="description" rows="4" columns="10" placeholder="Recipe Description"></textarea>
+                  <textarea className="desc-input" ref={(input) => { this.description= input }} name="description" rows="4" columns="10" placeholder="Recipe Description"></textarea>
+
                   <div className="ing-form">
-                    <div className="ing-input">
-                      <input type="text" ref={(input) => { this.ingredient = input }} name="ingredient" placeholder="Ingredient"></input>
-                      <div className="input-group-button ing-btn">
-                        <button className="delete-btn">
-                          <i className="fa fa-trash"></i>
-                        </button>
-                      </div>
-                    </div>
-                    <div className="ing-input">
-                      <input type="text" ref={(input) => { this.ingredient = input }} name="ingredient" placeholder="Ingredient"></input>
-                      <div className="input-group-button ing-btn">
-                        <button className="delete-btn">
-                          <i className="fa fa-trash"></i>
-                        </button>
-                      </div>
-                    </div>
                     <div className="ing-input">
                       <input type="text" ref={(input) => { this.ingredient = input }} name="ingredient" placeholder="Ingredient"></input>
                       <div className="input-group-button ing-btn">
@@ -80,6 +65,7 @@ class Add extends React.Component{
                   </div>
               </Col>
             </Row>
+
             <Row>
               <Col xs="12" lg={{ size: 6, offset: 3}}>
                 <div className="inst-grp">
@@ -101,7 +87,7 @@ class Add extends React.Component{
                   <button className="add-btn" type="button">ADD</button>
                 </div>
                 <div class="text-center">
-                  <button className="add-btn" type="button" onClick={this.createRecipe}>SAVE</button>
+                  <button type="button" className="add-btn" onClick={this.createRecipe} > SAVE</button>
                   <button className="add-btn" type="button">DELETE</button>
                 </div>
               </Col>
