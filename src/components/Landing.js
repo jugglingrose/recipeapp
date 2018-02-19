@@ -32,7 +32,14 @@ class Landing extends React.Component{
               <a href="/add"><button type="button" className="add-btn">ADD</button></a>
             </Col>
           </Row>
-          <Synopsis />
+          <ul>
+            {
+              Object
+              .keys(this.props.recipes)
+              .map(key => <Synopsis key={key} details={this.props.recipes[key]}/>)
+            }
+
+          </ul>
       </Container>
     </div>
     );

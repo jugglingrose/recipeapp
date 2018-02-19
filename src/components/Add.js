@@ -1,6 +1,6 @@
 import React from 'react';
 import {Container, Row, Col} from 'reactstrap';
-import Ingredient from './Ingredient';
+
 
 class Add extends React.Component{
   constructor(){

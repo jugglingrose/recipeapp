@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Nav extends React.Component {
   render() {
@@ -7,7 +8,7 @@ class Nav extends React.Component {
             <div className="navbar-header">
               <ul>
                 <li>
-                  <a className="navbar-brand" href="/">Recipe App</a>
+                  <Link to="/">Recipe App</Link>
                 </li>
               </ul>
             </div>
@@ -15,7 +16,7 @@ class Nav extends React.Component {
 
             <div className="desktop-nav">
               <ul>
-                <a href="/add"><li>ADD RECIPE</li></a>
+                <Link to="/add"><li>ADD RECIPE</li></Link>
                 <li>
                   <form className="navbar-form" action="#">
                     <div className="input-grp">

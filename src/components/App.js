@@ -7,6 +7,7 @@ import Footer from './Footer';
 import Landing from './Landing';
 import Login from './Login';
 import Add from './Add';
+import FullRecipe from './FullRecipe';
 
 
 class App extends React.Component {
@@ -15,8 +16,22 @@ class App extends React.Component {
     this.addRecipe = this.addRecipe.bind(this);
     //get initial state//
     this.state = {
-      recipes: {}
-    }
+      recipes: {
+      recipe1: {
+        title: 'Pacific Halibut',
+        time: 17,
+        description: 'the best halibut ever',
+        ingredient: 'halibut',
+        instruction: 'bake for 17 minutes'
+      },
+      recipe2: {
+        title: 'Cookies',
+        time: 12,
+        description: 'yummy cookies',
+        ingredient: 'cookie dough, chocolate chips',
+        instruction: 'bake for 12 minutes'
+      }
+    }}
   }
 
   addRecipe(recipe){
@@ -35,8 +50,9 @@ class App extends React.Component {
       <div>
         <Nav />
         <Switch>
-          <Route exact path="/" component={Landing} />
+          <Route exact path="/" render={(props) => (<Landing {...props} recipes={this.state.recipes} />)}/>/>
           <Route exact path="/add" render={(props) => (<Add {...props} addRecipe={this.addRecipe} />)}/> />
+          <Route exact path="/full/:recipeId" render={(props) => (<FullRecipe {...props} recipes={this.state.recipes} />)}/>/>
         </Switch>
         <Footer />
       </div>
