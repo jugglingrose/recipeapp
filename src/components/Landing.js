@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import Synopsis from './Synopsis';
+import { Link } from 'react-router-dom';
 
 class Landing extends React.Component{
 
@@ -29,14 +30,14 @@ class Landing extends React.Component{
           </Row>
           <Row>
             <Col xs="12" md={{ size: 10, offset: 1}} lg={{ size: 6, offset: 3}} className="text-center">
-              <a href="/add"><button type="button" className="add-btn">ADD</button></a>
+              <Link to="/add"><button type="button" className="add-btn">ADD</button></Link>
             </Col>
           </Row>
           <ul>
             {
               Object
               .keys(this.props.recipes)
-              .map(key => <Synopsis key={key} details={this.props.recipes[key]}/>)
+              .map(key => <Synopsis id={key} details={this.props.recipes[key]}/>)
             }
 
           </ul>

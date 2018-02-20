@@ -2,7 +2,17 @@ import React from 'react';
 import {Container, Row, Col } from 'reactstrap';
 
 class FullRecipe extends React.Component {
+
+  constructor(props) {
+    super(props);
+    }
+
   render(){
+    var id = (this.props.match.params.id)
+    var ingredients = (this.props.recipes[id].ingredient)
+    console.log(ingredients);
+
+
     return(
       <div id="synopsis-page">
         <div className="content">
@@ -15,7 +25,7 @@ class FullRecipe extends React.Component {
         <Row>
           <Col xs="12" md={{size: 10, offset: 1}} lg={{size: 6, offset: 3}} className="text-center synopsis">
             <div className="summary-title">
-              <h2>Recipe Name</h2>
+              <h2>{this.props.recipes[id].title}</h2>
             </div>
           </Col>
         </Row>
@@ -30,15 +40,12 @@ class FullRecipe extends React.Component {
           <Col xs="12" md={{size: 10, offset: 1}} lg={{size: 6, offset: 3}} className="text-center">
 
             <i className="fa fa-clock-o"></i>
-            <p className="inline">30m</p>
+            <p className="inline">{this.props.recipes[id].time}</p>
           </Col>
         </Row>
         <Row>
           <Col xs="12" md={{ size: 10, offset: 1}} lg={{ size: 6, offset: 3}} className="text-center synopsis">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
-                tempor tellus sit amet felis venenatis, id bibendum libero tempor.
-                Integer fermentum fringilla lorem, quis maximus enim euismod at.
-              </p>
+              <p>{this.props.recipes[id].description}</p>
           </Col>
         </Row>
         <Row>
@@ -50,15 +57,15 @@ class FullRecipe extends React.Component {
         <Row>
           <Col xs="12" md={{size: 10, offset: 1}} lg={{size: 6, offset: 3}} className="synopsis ing-list">
             <ul className="list-ing-1">
-              <li>3 Eggs</li>
-              <li>1/2 cup of milk</li>
-              <li>1 cup of flour</li>
-              <li>1 med apple peeled, cored & chopped</li>
+              {
+              ingredients.map((ingredient) => <li key={ingredient}>{ingredient}</li>)
+              }
             </ul>
             <ul className="list-ing-2">
-              <li>1/3 cup of water</li>
+              {/*}<li>1/3 cup of water</li>
               <li>1 box of saltine crackers</li>
-              <li>1 ripe banana</li>
+              <li>1 ripe banana</li>*/}
+
             </ul>
           </Col>
         </Row>

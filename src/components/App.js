@@ -21,14 +21,14 @@ class App extends React.Component {
         title: 'Pacific Halibut',
         time: 17,
         description: 'the best halibut ever',
-        ingredient: 'halibut',
+        ingredient: ['halibut', "oil"],
         instruction: 'bake for 17 minutes'
       },
       recipe2: {
         title: 'Cookies',
         time: 12,
         description: 'yummy cookies',
-        ingredient: 'cookie dough, chocolate chips',
+        ingredient: ['cookie dough, chocolate chips'],
         instruction: 'bake for 12 minutes'
       }
     }}
@@ -52,7 +52,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" render={(props) => (<Landing {...props} recipes={this.state.recipes} />)}/>/>
           <Route exact path="/add" render={(props) => (<Add {...props} addRecipe={this.addRecipe} />)}/> />
-          <Route exact path="/full/:recipeId" render={(props) => (<FullRecipe {...props} recipes={this.state.recipes} />)}/>/>
+          <Route path="/full/:id" render={(props) => (<FullRecipe {...props} recipes={this.state.recipes} />)}/>/>
         </Switch>
         <Footer />
       </div>
