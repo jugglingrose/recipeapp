@@ -5,13 +5,23 @@ import {Container, Row, Col} from 'reactstrap';
 class Edit extends React.Component{
   constructor(){
 	   super();
-      this.update = this.update.bind(this);
+      this.handleChange = this.handleChange.bind(this);
     }
     /*this is a test*/
-    update(e){
+    handleChange(e){
       console.log('update called');
-      console.log(e);
-      console.log(e.target.value);
+      const target = e.target;
+      const name = target.name;
+      console.log(name);
+      const value = target.value;
+      console.log(value);
+
+      const recipe = {
+        [name]: value,
+      }
+      console.log(recipe);
+      
+
 
     }
 
@@ -36,9 +46,9 @@ class Edit extends React.Component{
               <Col xs="12" lg={{ size: 6, offset: 3}}>
                 <div className="add-form-group">
                   <input type="text"
-                    className="add-input" name="recipe-title" value={this.props.recipes[id].title} onChange={(e) => this.update("title", e)}></input>
+                    className="add-input" name="title" value={this.props.recipes[id].title} onChange={(e) => this.handleChange(e)}></input>
                   <input type="text"
-                    className="add-input" name="cook-time"  value={this.props.recipes[id].time} ></input>
+                    className="add-input" name="time"  value={this.props.recipes[id].time} onChange={(e) => this.handleChange(e)}></input>
                   <textarea className="desc-input"
                     name="description" rows="4" columns="10"  value={this.props.recipes[id].description}></textarea>
 
