@@ -1,15 +1,14 @@
 import React from 'react';
 import {Container, Row, Col } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class FullRecipe extends React.Component {
 
-  constructor(props) {
-    super(props);
-    }
 
   render(){
-    var id = (this.props.match.params.id)
-    var ingredients = (this.props.recipes[id].ingredient)
+    var id = (this.props.match.params.id);
+    var ingredients = (this.props.recipes[id].ingredient);
+    var instruction = (this.props.recipes[id].instruction);
     console.log(ingredients);
 
 
@@ -19,7 +18,7 @@ class FullRecipe extends React.Component {
       <Container fluid={true}>
         <Row>
           <Col xs="12" md={{ size: 10, offset: 1}} lg={{ size: 6, offset: 3}} className="recipe-img">
-              <img src="../assets/img/food_blur.jpg"  alt="food"></img>
+              <img src=".../assets/img/food_blur.jpg"  alt="food"></img>
           </Col>
         </Row>
         <Row>
@@ -32,7 +31,7 @@ class FullRecipe extends React.Component {
 
         <Row>
           <Col xs="12" md={{size: 10, offset: 1}} lg={{size: 6, offset: 3}} className="text-center">
-            <button type="button" className="add-btn">EDIT</button>
+            <Link to={"/edit/" + id}><button type="button" className="add-btn">EDIT</button></Link>
             <button type="button" className="add-btn">FORK</button>
           </Col>
         </Row>
@@ -40,7 +39,7 @@ class FullRecipe extends React.Component {
           <Col xs="12" md={{size: 10, offset: 1}} lg={{size: 6, offset: 3}} className="text-center">
 
             <i className="fa fa-clock-o"></i>
-            <p className="inline">{this.props.recipes[id].time}</p>
+            <p className="time">{this.props.recipes[id].time}</p>
           </Col>
         </Row>
         <Row>
@@ -62,9 +61,6 @@ class FullRecipe extends React.Component {
               }
             </ul>
             <ul className="list-ing-2">
-              {/*}<li>1/3 cup of water</li>
-              <li>1 box of saltine crackers</li>
-              <li>1 ripe banana</li>*/}
 
             </ul>
           </Col>
@@ -79,24 +75,9 @@ class FullRecipe extends React.Component {
         <Row>
           <Col xs="12" md={{ size: 10, offset: 1}} lg={{ size: 6, offset: 3}} className="synopsis">
             <ol className="list-numbers">
-              <li>
-                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eros erat, laoreet sed dignissim sed,
-                  cursus eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eros erat, laoreet sed
-                  dignissim sed,
-                </span>
-              </li>
-              <li>
-                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eros erat, laoreet sed dignissim sed,
-                  cursus eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eros erat, laoreet sed
-                  dignissim sed,
-                </span>
-              </li>
-              <li>
-                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eros erat, laoreet sed dignissim sed,
-                  cursus eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eros erat, laoreet sed
-                  dignissim sed,
-                </span>
-              </li>
+              {
+                instruction.map((instruction) => <li key={instruction}><span>{instruction}</span></li>)
+              }
             </ol>
           </Col>
         </Row>

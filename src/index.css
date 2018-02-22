@@ -83,9 +83,9 @@ p{
 }
 
 .navbar-search{
-  height: 25px;
+  /*height: 25px;*/
   margin: 0px;
-  padding: 0px;
+  /*padding: 0px;*/
   border: none;
 }
 
@@ -314,6 +314,11 @@ textarea{
 
 .list-numbers span{
   font-size: 18px;
+}
+
+.time{
+  display: inline-block;
+  margin-left: 10px;
 }
 
 /*-------------------------------------------------------------*/
