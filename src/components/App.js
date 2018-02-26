@@ -14,6 +14,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.addRecipe = this.addRecipe.bind(this);
+    this.titleChange = this.titleChange.bind(this);
     //get initial state//
     this.state = {
       recipes: {
@@ -46,12 +47,20 @@ class App extends React.Component {
     this.setState({recipes: recipes});
   }
 
-  /* This a test*/
-  updateRecipe(event){
-    console.log("event called");
-
+  titleChange = (id) => (e) => {
+    const target = e.target;
+    const name = target.name;
+    const value = target.value;
+    const recipes = {...this.state.recipes};
+    console.log(id, target, name, value);
+    const updateRecipe = Object.keys(recipes).map((recipe, sidx) => {
+      console.log(recipe);
+      if (id !== sidx) return recipe;
+      return { ...recipe, name: value};
+    });
+    console.log(updateRecipe);
+    this.setState({ recipes: updateRecipe});
   }
-
 
   render() {
     return (
@@ -61,7 +70,7 @@ class App extends React.Component {
           <Route exact path="/" render={(props) => (<Landing {...props} recipes={this.state.recipes} />)}/>/>
           <Route path="/add" render={(props) => (<Add {...props} addRecipe={this.addRecipe} />)}/> />
           <Route path="/full/:id" render={(props) => (<FullRecipe {...props} recipes={this.state.recipes} />)}/>/>
-          <Route path="/edit/:id" render={(props) => (<Edit {...props} update={this.update} recipes={this.state.recipes} />)}/>/>
+          <Route path="/edit/:id" render={(props) => (<Edit {...props} titleChange={this.titleChange} recipes={this.state.recipes} />)}/>/>
         </Switch>
         <Footer />
       </div>
