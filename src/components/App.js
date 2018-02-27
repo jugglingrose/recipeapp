@@ -48,17 +48,22 @@ class App extends React.Component {
   }
 
   titleChange = (id) => (e) => {
+    console.log("app is here");
+    console.log(id);
+
     const target = e.target;
     const name = target.name;
     const value = target.value;
     const recipes = {...this.state.recipes};
     console.log(id, target, name, value);
-    const updateRecipe = Object.keys(recipes).map((recipe, sidx) => {
-      console.log(recipe);
+
+    const updateRecipe = Object.keys(recipes).map((recipename, sidx) => {
+      var recipe = recipes[recipename]; // JANITHA
       if (id !== sidx) return recipe;
       return { ...recipe, name: value};
     });
-    console.log(updateRecipe);
+    console.log("L67", updateRecipe);
+    console.log(recipes);
     this.setState({ recipes: updateRecipe});
   }
 
