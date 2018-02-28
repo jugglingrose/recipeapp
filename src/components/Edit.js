@@ -1,5 +1,7 @@
 import React from 'react';
 import {Container, Row, Col} from 'reactstrap';
+import Ingredient from './Ingredient';
+
 
 
 class Edit extends React.Component{
@@ -30,19 +32,10 @@ class Edit extends React.Component{
                     className="add-input" name="time"  value={this.props.recipes[id].time} onChange={this.props.timeChange(id)}></input>
                   <textarea className="desc-input"
                     name="description" rows="4" columns="10"  value={this.props.recipes[id].description} onChange={this.props.descChange(id)}></textarea>
-
-
                   <div className="ing-form">
-
-
-                    <div className="ing-input">
-                      <input type="text" ref={(input) => { this.ingredient = input }} name="ingredient" placeholder="Ingredient"></input>
-                      <div className="input-group-button ing-btn">
-                        <button className="delete-btn">
-                          <i className="fa fa-trash"></i>
-                        </button>
-                      </div>
-                    </div>
+                    {
+                      this.props.recipes[id].ingredient.map((ingredient, idx) => <Ingredient key={idx} ingId={idx} ingChange={this.props.ingChange()} ing={ingredient}/>)
+                    }
                   </div>
                 </div>
               </Col>

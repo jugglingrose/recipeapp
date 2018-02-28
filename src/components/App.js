@@ -16,11 +16,11 @@ class App extends React.Component {
     this.addRecipe = this.addRecipe.bind(this);
     this.titleChange = this.titleChange.bind(this);
     this.timeChange = this.timeChange.bind(this);
+    this.ingChange = this.ingChange.bind(this);
     //get initial state//
     this.state = {
       recipes: {
         recipe1: {
-        id: 1,
         title: 'Pacific Halibut',
         time: 17,
         description: 'the best halibut ever',
@@ -28,7 +28,6 @@ class App extends React.Component {
         instruction: ['preheat oven at 350', 'sprinkle seasonings on fish', 'place foil on baking sheet', 'bake for 17 minutes']
       },
       recipe2: {
-        id: 2,
         title: 'Cookies',
         time: 12,
         description: 'yummy cookies',
@@ -81,6 +80,13 @@ class App extends React.Component {
     this.setState({ recipes: recipes});
   }
 
+  ingChange = (id) => (e) => {
+    console.log("ing change called");
+    console.log("ingredient id for ingchange is: " + id);
+    console.log("event is " + e.target);
+
+  }
+
   render() {
     return (
       <div>
@@ -89,7 +95,7 @@ class App extends React.Component {
           <Route exact path="/" render={(props) => (<Landing {...props} recipes={this.state.recipes} />)}/>/>
           <Route path="/add" render={(props) => (<Add {...props} addRecipe={this.addRecipe} />)}/> />
           <Route path="/full/:id" render={(props) => (<FullRecipe {...props} recipes={this.state.recipes} />)}/>/>
-          <Route path="/edit/:id" render={(props) => (<Edit {...props} descChange={this.descChange} timeChange={this.timeChange} titleChange={this.titleChange} recipes={this.state.recipes} />)}/>/>
+          <Route path="/edit/:id" render={(props) => (<Edit {...props} ingChange={this.ingChange} descChange={this.descChange} timeChange={this.timeChange} titleChange={this.titleChange} recipes={this.state.recipes} />)}/>/>
         </Switch>
         <Footer />
       </div>
