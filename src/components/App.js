@@ -15,10 +15,12 @@ class App extends React.Component {
     super();
     this.addRecipe = this.addRecipe.bind(this);
     this.titleChange = this.titleChange.bind(this);
+    this.timeChange = this.timeChange.bind(this);
     //get initial state//
     this.state = {
       recipes: {
-      recipe1: {
+        recipe1: {
+        id: 1,
         title: 'Pacific Halibut',
         time: 17,
         description: 'the best halibut ever',
@@ -26,6 +28,7 @@ class App extends React.Component {
         instruction: ['preheat oven at 350', 'sprinkle seasonings on fish', 'place foil on baking sheet', 'bake for 17 minutes']
       },
       recipe2: {
+        id: 2,
         title: 'Cookies',
         time: 12,
         description: 'yummy cookies',
@@ -33,7 +36,7 @@ class App extends React.Component {
         instruction: ['preheat oven at 350', 'mix ingreients together in a bowl',
                       'place a teaspoon of dough on a baking sheet one inch apart', 'bake for 12 minutes']
       }
-    }}
+    }};
   }
 
   addRecipe(recipe){
@@ -48,23 +51,34 @@ class App extends React.Component {
   }
 
   titleChange = (id) => (e) => {
-    console.log("app is here");
-    console.log(id);
+    console.log("title change called");
 
-    const target = e.target;
-    const name = target.name;
-    const value = target.value;
+    const value = e.target.value;
     const recipes = {...this.state.recipes};
-    console.log(id, target, name, value);
-
-    const updateRecipe = Object.keys(recipes).map((recipename, sidx) => {
-      var recipe = recipes[recipename]; // JANITHA
-      if (id !== sidx) return recipe;
-      return { ...recipe, name: value};
-    });
-    console.log("L67", updateRecipe);
+    console.log(id, value);
+    recipes[id].title = value;
     console.log(recipes);
-    this.setState({ recipes: updateRecipe});
+
+    this.setState({ recipes: recipes});
+  }
+
+  timeChange = (id) => (e) => {
+    console.log("time change called");
+    const value = e.target.value;
+    const recipes = {...this.state.recipes};
+    recipes[id].time = value;
+    console.log(recipes);
+
+    this.setState({ recipes: recipes});
+  }
+
+  descChange = (id) => (e) => {
+    console.log("desc change called");
+    const value = e.target.value;
+    const recipes = {...this.state.recipes};
+    recipes[id].description = value;
+    console.log(recipes);
+    this.setState({ recipes: recipes});
   }
 
   render() {
@@ -75,7 +89,7 @@ class App extends React.Component {
           <Route exact path="/" render={(props) => (<Landing {...props} recipes={this.state.recipes} />)}/>/>
           <Route path="/add" render={(props) => (<Add {...props} addRecipe={this.addRecipe} />)}/> />
           <Route path="/full/:id" render={(props) => (<FullRecipe {...props} recipes={this.state.recipes} />)}/>/>
-          <Route path="/edit/:id" render={(props) => (<Edit {...props} titleChange={this.titleChange} recipes={this.state.recipes} />)}/>/>
+          <Route path="/edit/:id" render={(props) => (<Edit {...props} descChange={this.descChange} timeChange={this.timeChange} titleChange={this.titleChange} recipes={this.state.recipes} />)}/>/>
         </Switch>
         <Footer />
       </div>

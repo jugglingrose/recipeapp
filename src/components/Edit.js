@@ -3,13 +3,6 @@ import {Container, Row, Col} from 'reactstrap';
 
 
 class Edit extends React.Component{
-  constructor(){
-	   super();
-
-    }
-
-
-
 
   render(){
 
@@ -34,11 +27,14 @@ class Edit extends React.Component{
                   <input type="text"
                     className="add-input" name="title" value={this.props.recipes[id].title} onChange={this.props.titleChange(id)}></input>
                   <input type="text"
-                    className="add-input" name="time"  value={this.props.recipes[id].time} onChange={(e) => this.handleChange(e)}></input>
+                    className="add-input" name="time"  value={this.props.recipes[id].time} onChange={this.props.timeChange(id)}></input>
                   <textarea className="desc-input"
-                    name="description" rows="4" columns="10"  value={this.props.recipes[id].description}></textarea>
+                    name="description" rows="4" columns="10"  value={this.props.recipes[id].description} onChange={this.props.descChange(id)}></textarea>
+
 
                   <div className="ing-form">
+
+
                     <div className="ing-input">
                       <input type="text" ref={(input) => { this.ingredient = input }} name="ingredient" placeholder="Ingredient"></input>
                       <div className="input-group-button ing-btn">
