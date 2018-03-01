@@ -17,6 +17,8 @@ class App extends React.Component {
     this.titleChange = this.titleChange.bind(this);
     this.timeChange = this.timeChange.bind(this);
     this.ingChange = this.ingChange.bind(this);
+    this.instructionChange = this.instructionChange.bind(this);
+
     //get initial state//
     this.state = {
       recipes: {
@@ -54,10 +56,8 @@ class App extends React.Component {
 
     const value = e.target.value;
     const recipes = {...this.state.recipes};
-    console.log(id, value);
     recipes[id].title = value;
     console.log(recipes);
-
     this.setState({ recipes: recipes});
   }
 
@@ -76,15 +76,21 @@ class App extends React.Component {
     const value = e.target.value;
     const recipes = {...this.state.recipes};
     recipes[id].description = value;
-    console.log(recipes);
     this.setState({ recipes: recipes});
   }
 
-  ingChange = (id) => (e) => {
-    console.log("ing change called");
-    console.log("ingredient id for ingchange is: " + id);
-    console.log("event is " + e.target);
+  ingChange = (recipeId, ingId) => (e) => {
+    const recipes = {...this.state.recipes};
+    recipes[recipeId].ingredient[ingId] = e.target.value;
+    this.setState({ recipes: recipes});
+  }
 
+  instructionChange = (recipeId, instructionId) => (e) => {
+    console.log("instruction change called");
+    const recipes = {...this.state.recipes};
+    recipes[recipeId].instruction[instructionId] = e.target.value;
+    this.setState({ recipes: recipes});
+    console.log(recipes);
   }
 
   render() {
@@ -95,7 +101,7 @@ class App extends React.Component {
           <Route exact path="/" render={(props) => (<Landing {...props} recipes={this.state.recipes} />)}/>/>
           <Route path="/add" render={(props) => (<Add {...props} addRecipe={this.addRecipe} />)}/> />
           <Route path="/full/:id" render={(props) => (<FullRecipe {...props} recipes={this.state.recipes} />)}/>/>
-          <Route path="/edit/:id" render={(props) => (<Edit {...props} ingChange={this.ingChange} descChange={this.descChange} timeChange={this.timeChange} titleChange={this.titleChange} recipes={this.state.recipes} />)}/>/>
+          <Route path="/edit/:id" render={(props) => (<Edit {...props} instructionChange={this.instructionChange} ingChange={this.ingChange} descChange={this.descChange} timeChange={this.timeChange} titleChange={this.titleChange} recipes={this.state.recipes} />)}/>/>
         </Switch>
         <Footer />
       </div>

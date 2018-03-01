@@ -4,16 +4,12 @@ import {Container, Row, Col} from 'reactstrap';
 class Ingredient extends React.Component{
   render(){
 
-    const ingredient = this.props.ing;
-    const ingId = this.props.ingId;
+    var recipeId = this.props.recipeId;
+    var ingId = this.props.ingId;
 
-    console.log("ingredients is " + ingredient);
-    console.log("ingredient id is " + ingId);
-
-
-    return(
+  return(
     <div className="ing-input">
-      <input type="text" name="ingredient" value={ingredient} onChange={this.props.ingChange(ingId)}></input>
+      <input type="text" name="ingredient" value={this.props.ing} onChange={this.props.ingChange(recipeId, ingId)}></input>
       <div className="input-group-button ing-btn">
         <button className="delete-btn">
           <i className="fa fa-trash"></i>

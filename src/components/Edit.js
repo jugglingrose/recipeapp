@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, Row, Col} from 'reactstrap';
 import Ingredient from './Ingredient';
-
+import Instruction from './Instruction';
 
 
 class Edit extends React.Component{
@@ -34,7 +34,8 @@ class Edit extends React.Component{
                     name="description" rows="4" columns="10"  value={this.props.recipes[id].description} onChange={this.props.descChange(id)}></textarea>
                   <div className="ing-form">
                     {
-                      this.props.recipes[id].ingredient.map((ingredient, idx) => <Ingredient key={idx} ingId={idx} ingChange={this.props.ingChange()} ing={ingredient}/>)
+                      this.props.recipes[id].ingredient.map((ingredient, idx) =>
+                      <Ingredient key={idx} ingId={idx} recipeId={id} ingChange={this.props.ingChange} ing={ingredient}/>)
                     }
                   </div>
                 </div>
@@ -48,23 +49,13 @@ class Edit extends React.Component{
               </Col>
             </Row>
 
+            {
+              this.props.recipes[id].instruction.map((instruction, idx) =>
+              <Instruction key={idx} recipeId={id} instructionId={idx} instruction={instruction} instructionChange={this.props.instructionChange} />)
+            }
+
             <Row>
               <Col xs="12" lg={{ size: 6, offset: 3}}>
-                <div className="inst-grp">
-                  <textarea type="text" ref={(input) => { this.instruction = input }} name="instruction" className="instruction" rows="4" columns="10" placeholder="Recipe Instruction"></textarea>
-                  <div className="instruct-btn-grp">
-                    <div className="input-group-button">
-                      <button className="drag-button">
-                        <i className="fa fa-arrows-v"></i>
-                      </button>
-                    </div>
-                    <div className="input-group-button del">
-                      <button className="del">
-                        <i className="fa fa-trash"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
                 <div className="text-center">
                   <button className="add-btn" type="button">ADD</button>
                 </div>
