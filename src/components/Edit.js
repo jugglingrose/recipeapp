@@ -35,7 +35,7 @@ class Edit extends React.Component{
                   <div className="ing-form">
                     {
                       this.props.recipes[id].ingredient.map((ingredient, idx) =>
-                      <Ingredient key={idx} ingId={idx} recipeId={id} ingChange={this.props.ingChange} ing={ingredient}/>)
+                      <Ingredient key={idx} ingId={idx} recipeId={id} delIngredient={this.props.delIngredient} ingChange={this.props.ingChange} ing={ingredient}/>)
                     }
                   </div>
                 </div>
@@ -51,7 +51,7 @@ class Edit extends React.Component{
 
             {
               this.props.recipes[id].instruction.map((instruction, idx) =>
-              <Instruction key={idx} recipeId={id} instructionId={idx} instruction={instruction} instructionChange={this.props.instructionChange} />)
+              <Instruction key={idx} recipeId={id} instructionId={idx} instruction={instruction} delInstruction={this.props.delInstruction} instructionChange={this.props.instructionChange} />)
             }
 
             <Row>

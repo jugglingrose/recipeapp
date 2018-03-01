@@ -9,9 +9,10 @@ class Ingredient extends React.Component{
 
   return(
     <div className="ing-input">
-      <input type="text" name="ingredient" value={this.props.ing} onChange={this.props.ingChange(recipeId, ingId)}></input>
+      <input type="text" name="ingredient" value={this.props.ing}
+          onChange={this.props.ingChange(recipeId, ingId)}></input>
       <div className="input-group-button ing-btn">
-        <button className="delete-btn">
+        <button onClick={this.props.delIngredient(recipeId, ingId)} className="delete-btn">
           <i className="fa fa-trash"></i>
         </button>
       </div>

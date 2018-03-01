@@ -19,7 +19,7 @@ class Instruction extends React.Component{
                 </button>
               </div>
               <div className="input-group-button del">
-                <button className="del">
+                <button onClick={this.props.delInstruction(recipeId, instructionId)} className="del">
                   <i className="fa fa-trash"></i>
                 </button>
               </div>
