@@ -32,7 +32,7 @@ class FullRecipe extends React.Component {
         <Row>
           <Col xs="12" md={{size: 10, offset: 1}} lg={{size: 6, offset: 3}} className="text-center">
             <Link to={"/edit/" + id}><button type="button" className="add-btn">EDIT</button></Link>
-            <button type="button" className="add-btn">FORK</button>
+            <button type="button" id="fork" className="add-btn">FORK</button>
           </Col>
         </Row>
         <Row>

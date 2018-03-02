@@ -19,7 +19,7 @@ class Nav extends React.Component {
                 <Link to="/add"><li>ADD RECIPE</li></Link>
                 <li>
                   <form className="navbar-form" action="#">
-                    <div className="input-grp">
+                    <div id="search" className="input-grp">
                       <input type="text" className="navbar-search" name="search"/>
                       <div className="input-group-btn">
                         <button className="submit" type="submit">

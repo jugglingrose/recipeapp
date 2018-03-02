@@ -5,7 +5,6 @@ import Instruction from './Instruction';
 
 
 class Edit extends React.Component{
-
   render(){
 
     var id = (this.props.match.params.id);

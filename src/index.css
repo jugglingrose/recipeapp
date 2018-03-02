@@ -133,6 +133,10 @@ i.fa.fa-cog::before{
   float: right;
 }
 
+#search{
+  display: none;
+}
+
 
 
 
@@ -321,6 +325,9 @@ textarea{
   margin-left: 10px;
 }
 
+#fork{
+  display: none;
+}
 /*-------------------------------------------------------------*/
 /* LOGIN PAGE */
 
