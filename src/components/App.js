@@ -8,6 +8,7 @@ import Landing from './Landing';
 import Add from './Add';
 import FullRecipe from './FullRecipe';
 import Edit from './Edit';
+import NotFound from './NotFound';
 
 
 class App extends React.Component {
@@ -126,6 +127,7 @@ class App extends React.Component {
             instructionChange={this.instructionChange} delInstruction={this.delInstruction} ingChange={this.ingChange}
             descChange={this.descChange} timeChange={this.timeChange}
             titleChange={this.titleChange} recipes={this.state.recipes} />)}/>/>
+          <Route render={(props) => (<NotFound />)} />
         </Switch>
         <Footer />
       </div>

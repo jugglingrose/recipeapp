@@ -18,7 +18,7 @@ class FullRecipe extends React.Component {
       <Container fluid={true}>
         <Row>
           <Col xs="12" md={{ size: 10, offset: 1}} lg={{ size: 6, offset: 3}} className="recipe-img">
-              <img src=".../assets/img/food_blur.jpg"  alt="food"></img>
+                <img src={require('../assets/img/food_blur.jpg')} />
           </Col>
         </Row>
         <Row>

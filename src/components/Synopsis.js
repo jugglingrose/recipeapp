@@ -9,7 +9,7 @@ class Synopsis extends React.Component{
       <Row>
         <Col xs="12" md={{ size: 10, offset: 1}} lg={{ size: 6, offset: 3}} className="btm-margin">
           <div className="summary-title">
-            <Link to={"/full/" + this.props.id}><h2>{this.props.details.title}</h2></Link>
+              <Link to={"/full/" + this.props.id} style={{ color: 'white'}}><h2>{this.props.details.title}</h2></Link>
           </div>
           <div className="summary">
             <p>{this.props.details.description}</p>
