@@ -16,16 +16,17 @@ class App extends React.Component {
   constructor() {
     super();
     this.addRecipe = this.addRecipe.bind(this);
-    this.titleChange = this.titleChange.bind(this);
+    /*this.titleChange = this.titleChange.bind(this);
     this.timeChange = this.timeChange.bind(this);
     this.ingChange = this.ingChange.bind(this);
     this.instructionChange = this.instructionChange.bind(this);
     this.delIngredient = this.delIngredient.bind(this);
-    this.delInstruction = this.delInstruction.bind(this);
+    this.delInstruction = this.delInstruction.bind(this);*/
     this.loadRecipes = this.loadRecipes.bind(this);
 
     //initialize state//
     this.state={
+      cur_recipe:{},
       recipes:{}
     }
   }
@@ -60,6 +61,7 @@ class App extends React.Component {
     this.setState({recipes: recipes});
   }
 
+/*
   titleChange = (id) => (e) => {
     console.log("title change called");
 
@@ -120,6 +122,7 @@ class App extends React.Component {
     this.setState({recipes: recipes});
     console.log(recipes);
   }
+  */
 
   render() {
     return (

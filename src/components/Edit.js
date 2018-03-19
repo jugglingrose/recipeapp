@@ -7,13 +7,40 @@ import Instruction from './Instruction';
 class Edit extends React.Component{
   constructor(){
     super();
-    if (this.props.match.params.id === undefined){
+    this.getRecipe = this.getRecipe.bind(this);
 
+    if (this.props.match.params.id === undefined){
+      this.state={
+        recipe:{
+          title: "",
+          time: "",
+          desc: "",
+          ingredient: "",
+          instruction: "",
+        }
+      }
     }
+    else{
+      this.getRecipe(this.props.match.params.id);
+      }
+    }
+
+  getRecipe(id){
+    console.log("getting one recipe");
+    fetch("http://localhost:4000/recipe/:id")
+    .then(data => data.json())
+    .then(data => {
+      console.log("matching recipe has been fetched", data);
+      /*const recipes = {...this.state.recipes};
+      this.setState({recipes: data});
+      console.log("state:" + this.state.recipes[0].title);*/
+    });
   }
+
   render(){
 
     var id = (this.props.match.params.id);
+    console.log("this is my id:" + id);
 
     return(
       <div id="add-recipe-page">
