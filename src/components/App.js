@@ -22,28 +22,32 @@ class App extends React.Component {
     this.instructionChange = this.instructionChange.bind(this);
     this.delIngredient = this.delIngredient.bind(this);
     this.delInstruction = this.delInstruction.bind(this);
+    this.loadRecipes = this.loadRecipes.bind(this);
 
-
-    //get initial state//
-    this.state = {
-      recipes: {
-        recipe1: {
-        title: 'Pacific Halibut',
-        time: 17,
-        description: 'the best halibut ever',
-        ingredient: ['halibut', "oil", "salt", "pepper", "kale"],
-        instruction: ['preheat oven at 350', 'sprinkle seasonings on fish', 'place foil on baking sheet', 'bake for 17 minutes']
-      },
-      recipe2: {
-        title: 'Cookies',
-        time: 12,
-        description: 'yummy cookies',
-        ingredient: ['cookie dough', 'chocolate chips', 'flour', 'butter', 'sugar'],
-        instruction: ['preheat oven at 350', 'mix ingreients together in a bowl',
-                      'place a teaspoon of dough on a baking sheet one inch apart', 'bake for 12 minutes']
-      }
-    }};
+    //initialize state//
+    this.state={
+      recipes:{}
+    }
   }
+
+    /* This function gets called once the constructor is done.*/
+    componentDidMount() {
+      this.loadRecipes();
+    }
+
+    /* This function is responsible for getting our recipes from our backend*/
+    loadRecipes() {
+      console.log("loading recipes...");
+      fetch("http://localhost:4000/recipes")
+      .then(data => data.json())
+      .then(data => {
+        console.log("recipes have been fetched", data);
+        const recipes = {...this.state.recipes};
+        this.setState({recipes: data});
+        console.log("state:" + this.state.recipes[0].title);
+      });
+    }
+
 
   addRecipe(recipe){
     //update our state

@@ -12,7 +12,7 @@ class Synopsis extends React.Component{
               <Link to={"/full/" + this.props.id} style={{ color: 'white'}}><h2>{this.props.details.title}</h2></Link>
           </div>
           <div className="summary">
-            <p>{this.props.details.description}</p>
+            <p>{this.props.details.desc}</p>
           </div>
         </Col>
       </Row>

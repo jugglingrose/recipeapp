@@ -5,6 +5,12 @@ import Instruction from './Instruction';
 
 
 class Edit extends React.Component{
+  constructor(){
+    super();
+    if (this.props.match.params.id === undefined){
+
+    }
+  }
   render(){
 
     var id = (this.props.match.params.id);
