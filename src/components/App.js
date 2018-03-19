@@ -9,6 +9,7 @@ import Add from './Add';
 import FullRecipe from './FullRecipe';
 import Edit from './Edit';
 import NotFound from './NotFound';
+import Ingredient from './Ingredient';
 
 
 class App extends React.Component {
@@ -21,6 +22,7 @@ class App extends React.Component {
     this.instructionChange = this.instructionChange.bind(this);
     this.delIngredient = this.delIngredient.bind(this);
     this.delInstruction = this.delInstruction.bind(this);
+
 
     //get initial state//
     this.state = {
@@ -126,7 +128,8 @@ class App extends React.Component {
           <Route path="/edit/:id" render={(props) => (<Edit {...props} delIngredient={this.delIngredient}
             instructionChange={this.instructionChange} delInstruction={this.delInstruction} ingChange={this.ingChange}
             descChange={this.descChange} timeChange={this.timeChange}
-            titleChange={this.titleChange} recipes={this.state.recipes} />)}/>/>
+            titleChange={this.titleChange} recipes={this.state.recipes}
+          /> )}/>/>
           <Route render={(props) => (<NotFound />)} />
         </Switch>
         <Footer />

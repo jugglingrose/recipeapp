@@ -43,7 +43,7 @@ class Edit extends React.Component{
             <Row>
               <Col xs="12" lg={{ size: 6, offset: 3}}>
                   <div className="text-center">
-                    <button className="add-btn" type="button">ADD</button>
+                    <button onClick={this.props.appendInput} className="add-btn" type="button">ADD</button>
                   </div>
               </Col>
             </Row>
