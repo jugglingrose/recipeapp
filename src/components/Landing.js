@@ -37,7 +37,7 @@ class Landing extends React.Component{
             {
               Object.keys(this.props.recipes)
               .map(key => <Synopsis id={key} details={this.props.recipes[key]}/>)
-              
+
             }
 
           </ul>

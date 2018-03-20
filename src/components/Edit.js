@@ -8,40 +8,43 @@ class Edit extends React.Component{
   constructor(){
     super();
     this.getRecipe = this.getRecipe.bind(this);
+    this.state={
+      recipe: {}
+    };
+  }
 
-    if (this.props.match.params.id === undefined){
-      this.state={
-        recipe:{
-          title: "",
-          time: "",
-          desc: "",
-          ingredient: "",
-          instruction: "",
-        }
-      }
+  componentDidMount(){
+    console.log("component did mount!");
+    var id = (this.props.match.params.id);
+    var recipe = this.props.recipes[id];
+    console.log("this is the recipe:" + recipe.title);
+
+    if(recipe === undefined){
+      console.log("edit page: recipe is undefined");
+      this.setState();
     }
-    else{
-      this.getRecipe(this.props.match.params.id);
+      else{
+        console.log("edit page: recipe is defined");
+        this.getRecipe(recipe._id);
       }
     }
 
   getRecipe(id){
     console.log("getting one recipe");
-    fetch("http://localhost:4000/recipe/:id")
+    console.log("id:" + id);
+    fetch("http://localhost:4000/recipe/" + id)
     .then(data => data.json())
     .then(data => {
       console.log("matching recipe has been fetched", data);
-      /*const recipes = {...this.state.recipes};
-      this.setState({recipes: data});
-      console.log("state:" + this.state.recipes[0].title);*/
+      /*const recipes = {...this.state.recipes};*/
+      this.setState({recipe: data});
+      console.log("state:" + this.state.recipe.time);
     });
   }
 
   render(){
 
     var id = (this.props.match.params.id);
-    console.log("this is my id:" + id);
-
     return(
       <div id="add-recipe-page">
         <div className="content">
@@ -59,14 +62,14 @@ class Edit extends React.Component{
               <Col xs="12" lg={{ size: 6, offset: 3}}>
                 <div className="add-form-group">
                   <input type="text"
-                    className="add-input" name="title" value={this.props.recipes[id].title} onChange={this.props.titleChange(id)}></input>
+                    className="add-input" name="title" value={this.state.recipe.title} onChange={this.props.titleChange(id)}></input>
                   <input type="text"
-                    className="add-input" name="time"  value={this.props.recipes[id].time} onChange={this.props.timeChange(id)}></input>
+                    className="add-input" name="time"  value={this.state.recipe.time} onChange={this.props.timeChange(id)}></input>
                   <textarea className="desc-input"
-                    name="description" rows="4" columns="10"  value={this.props.recipes[id].description} onChange={this.props.descChange(id)}></textarea>
+                    name="description" rows="4" columns="10"  value={this.state.recipe.desc} onChange={this.props.descChange(id)}></textarea>
                   <div className="ing-form">
                     {
-                      this.props.recipes[id].ingredient.map((ingredient, idx) =>
+                      this.state.recipe.ingredient.map((ingredient, idx) =>
                       <Ingredient key={idx} ingId={idx} recipeId={id} delIngredient={this.props.delIngredient} ingChange={this.props.ingChange} ing={ingredient}/>)
                     }
                   </div>
