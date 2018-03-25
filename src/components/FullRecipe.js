@@ -4,12 +4,27 @@ import { Link } from 'react-router-dom';
 
 class FullRecipe extends React.Component {
 
+  componentWillMount() {
+    console.log("JANITHA componentWillMount of FullRecipe");
+    this.props.createBlank();
+  }
+
+  componentDidMount() {
+    this.props.loadRecipe(this.props.match.params.id);
+  }
+
 
   render(){
-    var id = (this.props.match.params.id);
-    var ingredients = (this.props.recipes[id].ingredient);
-    var instruction = (this.props.recipes[id].instruction);
-    console.log(ingredients);
+    console.log("JANITHA render of FullRecipe");
+
+    var id = this.props.cur_recipe._id;
+    console.log("cur_recipe is:" + this.props.cur_recipe);
+
+    //If undefined set to blank array
+    var ingredients = this.props.cur_recipe.ingredient || [];
+    var instructions = this.props.cur_recipe.instruction || [];
+    console.log("ingredients:", ingredients);
+    console.log("instructions:", instructions);
 
 
     return(
@@ -24,7 +39,7 @@ class FullRecipe extends React.Component {
         <Row>
           <Col xs="12" md={{size: 10, offset: 1}} lg={{size: 6, offset: 3}} className="text-center synopsis">
             <div className="summary-title">
-              <h2>{this.props.recipes[id].title}</h2>
+              <h2>{this.props.cur_recipe.title}</h2>
             </div>
           </Col>
         </Row>
@@ -39,12 +54,12 @@ class FullRecipe extends React.Component {
           <Col xs="12" md={{size: 10, offset: 1}} lg={{size: 6, offset: 3}} className="text-center">
 
             <i className="fa fa-clock-o"></i>
-            <p className="time">{this.props.recipes[id].time}</p>
+            <p className="time">{this.props.cur_recipe.time}</p>
           </Col>
         </Row>
         <Row>
           <Col xs="12" md={{ size: 10, offset: 1}} lg={{ size: 6, offset: 3}} className="text-center synopsis">
-              <p>{this.props.recipes[id].description}</p>
+              <p>{this.props.cur_recipe.description}</p>
           </Col>
         </Row>
         <Row>
@@ -76,7 +91,7 @@ class FullRecipe extends React.Component {
           <Col xs="12" md={{ size: 10, offset: 1}} lg={{ size: 6, offset: 3}} className="synopsis">
             <ol className="list-numbers">
               {
-                instruction.map((instruction) => <li key={instruction}><span>{instruction}</span></li>)
+                instructions.map((instruction) => <li key={instruction}><span>{instruction}</span></li>)
               }
             </ol>
           </Col>

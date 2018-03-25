@@ -86,7 +86,7 @@ class Add extends React.Component{
                 <div className="text-center">
                   <button className="add-btn" type="button">ADD</button>
                 </div>
-                <div class="text-center">
+                <div className="text-center">
                   <button type="button" className="add-btn" onClick={this.createRecipe} > SAVE</button>
                   <button className="add-btn" type="button">DELETE</button>
                 </div>

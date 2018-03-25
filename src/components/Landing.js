@@ -5,6 +5,11 @@ import { Link } from 'react-router-dom';
 
 class Landing extends React.Component{
 
+  /* This function gets called once the constructor is done.*/
+  componentDidMount() {
+    this.props.loadRecipes();
+  }
+
   render(){
     return(
       <div className="login-contain">

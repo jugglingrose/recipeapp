@@ -23,18 +23,41 @@ class App extends React.Component {
     this.delIngredient = this.delIngredient.bind(this);
     this.delInstruction = this.delInstruction.bind(this);
     this.loadRecipes = this.loadRecipes.bind(this);
+    this.loadRecipe = this.loadRecipe.bind(this);
+    this.createBlank = this.createBlank.bind(this);
 
     //initialize state//
     this.state={
-      //cur_recipe:{},
+      cur_recipe:{},
       recipes:{}
     }
   }
 
-    /* This function gets called once the constructor is done.*/
-    componentDidMount() {
-      this.loadRecipes();
+  //call to clear the state.  Also, so when full recipe loads it will be blank
+  //until the data fills in.  Otherwsie, Full Recipe won't work as the async call
+  //comes in as undefined when render loads.
+  createBlank(){
+    console.log("blank recipe called");
+    const blank = {
+      title: '',
+      time: 0,
+      desc: '',
+      ingredient: [ ],
+      instruction: [ ]
     }
+    this.setState({cur_recipe: blank});
+
+  }
+
+  loadRecipe(id) {
+    console.log("loading a single recipe...");
+    fetch("http://localhost:4000/recipe/" + id)
+    .then(data => data.json())
+    .then(data => {
+      console.log("recipe has been fetched", data);
+      this.setState({cur_recipe: data});
+    });
+  }
 
 
     /* This function is responsible for getting our recipes from our backend*/
@@ -67,7 +90,7 @@ class App extends React.Component {
     console.log("title change called");
 
     const value = e.target.value;
-    const recipes = {...this.state.recipes};
+    const recipes = {...this.state.cur_recipe};
     recipes[id].title = value;
     console.log(recipes);
     this.setState({ recipes: recipes});
@@ -130,13 +153,14 @@ class App extends React.Component {
       <div>
         <Nav />
         <Switch>
-          <Route exact path="/" render={(props) => (<Landing {...props} recipes={this.state.recipes} />)}/>/>
+          <Route exact path="/" render={(props) => (<Landing {...props} loadRecipes = {this.loadRecipes} recipes={this.state.recipes} />)}/>/>
           <Route path="/add" render={(props) => (<Add {...props} addRecipe={this.addRecipe} />)}/> />
-          <Route path="/full/:id" render={(props) => (<FullRecipe {...props} recipes={this.state.recipes} />)}/>/>
+          <Route path="/full/:id" render={(props) => (<FullRecipe {...props} createBlank={this.createBlank} loadRecipe={this.loadRecipe} cur_recipe={this.state.cur_recipe} />)}/>/>
           <Route path="/edit/:id" render={(props) => (<Edit {...props} delIngredient={this.delIngredient}
             instructionChange={this.instructionChange} delInstruction={this.delInstruction} ingChange={this.ingChange}
             descChange={this.descChange} timeChange={this.timeChange}
             titleChange={this.titleChange} recipes={this.state.recipes}
+            loadRecipe={this.loadRecipe} createBlank={this.createBlank} cur_recipe={this.state.cur_recipe}
           /> )}/>/>
           <Route render={(props) => (<NotFound />)} />
         </Switch>

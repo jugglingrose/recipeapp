@@ -38,7 +38,7 @@ class Login extends React.Component {
           </Row>
           <Row>
             <Col xs="12" className="text-center">
-              <button class="add-btn" type="button">CREATE</button>
+              <button className="add-btn" type="button">CREATE</button>
             </Col>
           </Row>
         </Container>
