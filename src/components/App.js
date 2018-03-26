@@ -16,16 +16,13 @@ class App extends React.Component {
   constructor() {
     super();
     this.addRecipe = this.addRecipe.bind(this);
-    this.titleChange = this.titleChange.bind(this);
-    this.timeChange = this.timeChange.bind(this);
-    this.ingChange = this.ingChange.bind(this);
-    this.instructionChange = this.instructionChange.bind(this);
-    this.delIngredient = this.delIngredient.bind(this);
-    this.delInstruction = this.delInstruction.bind(this);
+    this.simpleChange = this.simpleChange.bind(this);
+    this.arrayChange = this.arrayChange.bind(this);
+    this.delChange = this.delChange.bind(this);
     this.loadRecipes = this.loadRecipes.bind(this);
     this.loadRecipe = this.loadRecipe.bind(this);
     this.createBlank = this.createBlank.bind(this);
-
+    this.updateRecipe = this.updateRecipe.bind(this);
     //initialize state//
     this.state={
       cur_recipe:{},
@@ -49,16 +46,26 @@ class App extends React.Component {
 
   }
 
+  updateRecipe(id) {
+    console.log("update recipe is being called");
+    fetch("http://localhost:4000/recipe/" + id, {
+      method: 'POST'
+    })
+    .then(data => data.json())
+    .then(data => {
+      console.log("recipe has been updated", data)
+    });
+  }
+
   loadRecipe(id) {
     console.log("loading a single recipe...");
     fetch("http://localhost:4000/recipe/" + id)
     .then(data => data.json())
     .then(data => {
-      console.log("recipe has been fetched", data);
+      console.log("recipe has been fetched", data.title);
       this.setState({cur_recipe: data});
     });
   }
-
 
     /* This function is responsible for getting our recipes from our backend*/
     loadRecipes() {
@@ -73,7 +80,6 @@ class App extends React.Component {
       });
     }
 
-
   addRecipe(recipe){
     //update our state
     //make a copy of our state first//
@@ -85,68 +91,32 @@ class App extends React.Component {
     this.setState({recipes: recipes});
   }
 
-
-  titleChange = (id) => (e) => {
+  simpleChange = (fieldName) => (e) => {
     console.log("title change called");
-
     const value = e.target.value;
-    const recipes = {...this.state.cur_recipe};
-    recipes[id].title = value;
-    console.log(recipes);
-    this.setState({ recipes: recipes});
+    const cur_recipe = {...this.state.cur_recipe};
+    cur_recipe[fieldName] = value;
+    console.log(cur_recipe);
+    this.setState({ cur_recipe : cur_recipe});
+    }
+
+  arrayChange = (fieldName, index) => (e) => {
+    console.log("array change called");
+    const cur_recipe = {...this.state.cur_recipe};
+    cur_recipe[fieldName][index] = e.target.value;
+    this.setState( {cur_recipe : cur_recipe});
   }
 
-  timeChange = (id) => (e) => {
-    console.log("time change called");
-    const value = e.target.value;
-    const recipes = {...this.state.recipes};
-    recipes[id].time = value;
-    console.log(recipes);
-
-    this.setState({ recipes: recipes});
-  }
-
-  descChange = (id) => (e) => {
-    console.log("desc change called");
-    const value = e.target.value;
-    const recipes = {...this.state.recipes};
-    recipes[id].description = value;
-    this.setState({ recipes: recipes});
-  }
-
-  ingChange = (recipeId, ingId) => (e) => {
-    console.log("ingredient change called");
-    const recipes = {...this.state.recipes};
-    recipes[recipeId].ingredient[ingId] = e.target.value;
-    this.setState({ recipes: recipes});
-  }
-
-  delIngredient = (recipeId, ingId) => (e) => {
+  delChange = (fieldName, index) => (e) => {
     e.preventDefault();
-    console.log("delete ingredient called");
-    const recipes = {...this.state.recipes};
-    recipes[recipeId].ingredient.splice(ingId, 1);
-    this.setState({ recipes: recipes});
-    console.log(recipes);
-  }
+    console.log("delete change called");
+    const cur_recipe = {...this.state.cur_recipe};
+    console.log('field name:' + fieldName);
+    console.log('index:' + index);
+    cur_recipe[fieldName].splice(index, 1);
+    this.setState({ cur_recipe : cur_recipe});
 
-  instructionChange = (recipeId, instructionId) => (e) => {
-    console.log("instruction change called");
-    const recipes = {...this.state.recipes};
-    recipes[recipeId].instruction[instructionId] = e.target.value;
-    this.setState({ recipes: recipes});
-    console.log(recipes);
   }
-
-  delInstruction = (recipeId, instructionId) => (e) => {
-    e.preventDefault();
-    console.log("delete instruction called");
-    const recipes = {...this.state.recipes};
-    recipes[recipeId].instruction.splice(instructionId, 1);
-    this.setState({recipes: recipes});
-    console.log(recipes);
-  }
-
 
   render() {
     return (
@@ -156,11 +126,10 @@ class App extends React.Component {
           <Route exact path="/" render={(props) => (<Landing {...props} loadRecipes = {this.loadRecipes} recipes={this.state.recipes} />)}/>/>
           <Route path="/add" render={(props) => (<Add {...props} addRecipe={this.addRecipe} />)}/> />
           <Route path="/full/:id" render={(props) => (<FullRecipe {...props} createBlank={this.createBlank} loadRecipe={this.loadRecipe} cur_recipe={this.state.cur_recipe} />)}/>/>
-          <Route path="/edit/:id" render={(props) => (<Edit {...props} delIngredient={this.delIngredient}
-            instructionChange={this.instructionChange} delInstruction={this.delInstruction} ingChange={this.ingChange}
-            descChange={this.descChange} timeChange={this.timeChange}
-            titleChange={this.titleChange} recipes={this.state.recipes}
-            loadRecipe={this.loadRecipe} createBlank={this.createBlank} cur_recipe={this.state.cur_recipe}
+          <Route path="/edit/:id" render={(props) => (<Edit {...props} delChange={this.delChange}
+            simpleChange={this.simpleChange} arrayChange={this.arrayChange}
+            loadRecipe={this.loadRecipe} createBlank={this.createBlank}
+            cur_recipe={this.state.cur_recipe} updateRecipe={this.updateRecipe}
           /> )}/>/>
           <Route render={(props) => (<NotFound />)} />
         </Switch>

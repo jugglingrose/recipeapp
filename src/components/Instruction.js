@@ -11,7 +11,8 @@ class Instruction extends React.Component{
       <Row>
         <Col xs="12" lg={{ size: 6, offset: 3}}>
           <div className="inst-grp">
-            <textarea type="text"  name="instruction" className="instruction" rows="4" columns="10" value={ this.props.instruction} onChange={this.props.instructionChange(recipeId, instructionId)}></textarea>
+            <textarea type="text"  name="instruction" className="instruction"
+              rows="4" columns="10" value={ this.props.instruction} onChange={this.props.arrayChange('instruction', instructionId)}></textarea>
             <div className="instruct-btn-grp">
               <div className="input-group-button">
                 <button className="drag-button">
@@ -19,7 +20,8 @@ class Instruction extends React.Component{
                 </button>
               </div>
               <div className="input-group-button del">
-                <button type="button" onClick={this.props.delInstruction(recipeId, instructionId)} className="del">
+                <button type="button" onClick={this.props.delChange('instruction', instructionId)}
+                  className="del">
                   <i className="fa fa-trash"></i>
                 </button>
               </div>

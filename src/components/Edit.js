@@ -53,15 +53,15 @@ class Edit extends React.Component{
               <Col xs="12" lg={{ size: 6, offset: 3}}>
                 <div className="add-form-group">
                   <input type="text"
-                    className="add-input" name="title" value={this.props.cur_recipe.title} /*onChange={this.props.titleChange(id)}*/></input>
+                    className="add-input" name="title" value={this.props.cur_recipe.title} onChange={this.props.simpleChange('title')}></input>
                   <input type="text"
-                    className="add-input" name="time"  value={this.props.cur_recipe.time} /*onChange={this.props.timeChange(id)}*/></input>
+                    className="add-input" name="time"  value={this.props.cur_recipe.time} onChange={this.props.simpleChange('time')}></input>
                   <textarea className="desc-input"
-                    name="description" rows="4" columns="10"  value={this.props.cur_recipe.desc} /*onChange={this.props.descChange(id)}*/></textarea>
+                    name="description" rows="4" columns="10"  value={this.props.cur_recipe.desc} onChange={this.props.simpleChange('desc')}></textarea>
                   <div className="ing-form">
                     {
                       ingredients.map((ingredient, idx) =>
-                      <Ingredient key={idx} ingId={idx} recipeId={cur_id} delIngredient={this.props.delIngredient} ingChange={this.props.ingChange} ing={ingredient}/>)
+                      <Ingredient key={idx} ingId={idx} recipeId={cur_id} delChange={this.props.delChange} arrayChange={this.props.arrayChange} ing={ingredient}/>)
                     }
                   </div>
                 </div>
@@ -77,7 +77,7 @@ class Edit extends React.Component{
 
             {
               instructions.map((instruction, idx) =>
-              <Instruction key={idx} recipeId={cur_id} instructionId={idx} instruction={instruction} delInstruction={this.props.delInstruction} instructionChange={this.props.instructionChange} />)
+              <Instruction key={idx} recipeId={cur_id} instructionId={idx} instruction={instruction} delChange={this.props.delChange} arrayChange={this.props.arrayChange} />)
             }
 
             <Row>
@@ -86,7 +86,7 @@ class Edit extends React.Component{
                   <button className="add-btn" type="button">ADD</button>
                 </div>
                 <div className="text-center">
-                  <button type="button" className="add-btn" onClick={this.updateRecipe} > SAVE</button>
+                  <button type="button" className="add-btn" onClick={() => {this.props.updateRecipe(this.props.cur_recipe._id)}} > SAVE</button>
                   <button className="add-btn" type="button">DELETE</button>
                 </div>
               </Col>
