@@ -86,7 +86,7 @@ class Edit extends React.Component{
                   <button className="add-btn" type="button">ADD</button>
                 </div>
                 <div className="text-center">
-                  <button type="button" className="add-btn" onClick={() => {this.props.updateRecipe(this.props.cur_recipe._id)}} > SAVE</button>
+                  <button type="button" className="add-btn" onClick={() => {this.props.updateRecipe(this.props.cur_recipe._id, this.props.cur_recipe)}} > SAVE</button>
                   <button className="add-btn" type="button">DELETE</button>
                 </div>
               </Col>

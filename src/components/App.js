@@ -46,14 +46,17 @@ class App extends React.Component {
 
   }
 
-  updateRecipe(id) {
+  updateRecipe(id, data) {
     console.log("update recipe is being called");
     fetch("http://localhost:4000/recipe/" + id, {
-      method: 'POST'
-    })
-    .then(data => data.json())
-    .then(data => {
-      console.log("recipe has been updated", data)
+      method: 'POST', // or 'PUT'
+      body: JSON.stringify(data),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    }).then(res => res.json())
+    .then(res => {
+      console.log("recipe has been updated", res)
     });
   }
 
