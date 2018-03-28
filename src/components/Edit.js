@@ -5,6 +5,10 @@ import Instruction from './Instruction';
 
 
 class Edit extends React.Component{
+  constructor() {
+    super();
+    this.addEdit = this.addEdit.bind(this);
+  }
 
   componentWillMount() {
     console.log("Edit Create Blank called");
@@ -15,17 +19,29 @@ class Edit extends React.Component{
     console.log("component did mount!");
     //call the load recipe to get our current location in return//
     var id = (this.props.match.params.id);
-    this.props.loadRecipe(id);
+    /*this.props.loadRecipe(id);*/
+    console.log("NIGHT: id=", id);
 
-    /*
-    if(recipe === undefined){
+    if(id === undefined){
       console.log("edit page: recipe is undefined");
-      this.setState();
+      this.props.createBlank();
     }
-      else{
+    else{
         console.log("edit page: recipe is defined");
-        this.getRecipe(recipe._id);
-      }*/
+        this.props.loadRecipe(id);
+      }
+    }
+
+    addEdit(id, recipe){
+      console.log("add/edit called");
+      /*updateRecipe(this.props.cur_recipe._id, this.props.cur_recipe)}*/
+      if(id === undefined){
+        console.log("add is undefined" + recipe.title);
+        this.props.addRecipe(recipe);
+      }
+      else{
+        this.props.updateRecipe(id, recipe);
+      }
     }
 
   render(){
@@ -70,7 +86,7 @@ class Edit extends React.Component{
             <Row>
               <Col xs="12" lg={{ size: 6, offset: 3}}>
                   <div className="text-center">
-                    <button onClick={this.props.appendInput} className="add-btn" type="button">ADD</button>
+                    <button onClick={() => this.props.appendInput()} className="add-btn" type="button">ADD</button>
                   </div>
               </Col>
             </Row>
@@ -86,7 +102,7 @@ class Edit extends React.Component{
                   <button className="add-btn" type="button">ADD</button>
                 </div>
                 <div className="text-center">
-                  <button type="button" className="add-btn" onClick={() => {this.props.updateRecipe(this.props.cur_recipe._id, this.props.cur_recipe)}} > SAVE</button>
+                  <button type="button" className="add-btn" onClick={() => {this.addEdit(this.props.cur_recipe._id, this.props.cur_recipe)}} > SAVE</button>
                   <button className="add-btn" type="button">DELETE</button>
                 </div>
               </Col>

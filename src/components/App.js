@@ -5,17 +5,16 @@ import { Route, Switch } from 'react-router-dom';
 import Nav from './Nav';
 import Footer from './Footer';
 import Landing from './Landing';
-import Add from './Add';
 import FullRecipe from './FullRecipe';
 import Edit from './Edit';
 import NotFound from './NotFound';
-import Ingredient from './Ingredient';
+
 
 
 class App extends React.Component {
   constructor() {
     super();
-    this.addRecipe = this.addRecipe.bind(this);
+
     this.simpleChange = this.simpleChange.bind(this);
     this.arrayChange = this.arrayChange.bind(this);
     this.delChange = this.delChange.bind(this);
@@ -23,6 +22,9 @@ class App extends React.Component {
     this.loadRecipe = this.loadRecipe.bind(this);
     this.createBlank = this.createBlank.bind(this);
     this.updateRecipe = this.updateRecipe.bind(this);
+    this.appendInput = this.appendInput.bind(this);
+    this.addRecipe = this.addRecipe.bind(this);
+
     //initialize state//
     this.state={
       cur_recipe:{},
@@ -39,17 +41,31 @@ class App extends React.Component {
       title: '',
       time: 0,
       desc: '',
-      ingredient: [ ],
-      instruction: [ ]
+      ingredient: [ " "],
+      instruction: [ " "]
     }
     this.setState({cur_recipe: blank});
+  }
 
+  addRecipe(data){
+    console.log("add recipe called" + data);
+    fetch("http://localhost:4000/recipe", {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    })
+    .then(res => res.json())
+    .then(res => {
+      console.log("new recipe has been added successfully", res)
+    });
   }
 
   updateRecipe(id, data) {
     console.log("update recipe is being called");
     fetch("http://localhost:4000/recipe/" + id, {
-      method: 'POST', // or 'PUT'
+      method: 'POST',
       body: JSON.stringify(data),
       headers: new Headers({
         'Content-Type': 'application/json'
@@ -83,7 +99,8 @@ class App extends React.Component {
       });
     }
 
-  addRecipe(recipe){
+
+  /*addRecipe(recipe){
     //update our state
     //make a copy of our state first//
     const recipes = {...this.state.recipes};
@@ -92,7 +109,7 @@ class App extends React.Component {
     recipes[`recipe-${timestamp}`] = recipe;
     //set state
     this.setState({recipes: recipes});
-  }
+  }*/
 
   simpleChange = (fieldName) => (e) => {
     console.log("title change called");
@@ -121,18 +138,33 @@ class App extends React.Component {
 
   }
 
+  appendInput(){
+    console.log("append input called")
+    const cur_recipe = {...this.state.cur_recipe};
+    var newIngInput = [""];
+    const ingInputs = cur_recipe.ingredient.concat(newIngInput);
+    cur_recipe.ingredient = ingInputs;
+    this.setState({ cur_recipe : cur_recipe});
+  }
+
   render() {
     return (
       <div>
         <Nav />
         <Switch>
           <Route exact path="/" render={(props) => (<Landing {...props} loadRecipes = {this.loadRecipes} recipes={this.state.recipes} />)}/>/>
-          <Route path="/add" render={(props) => (<Add {...props} addRecipe={this.addRecipe} />)}/> />
           <Route path="/full/:id" render={(props) => (<FullRecipe {...props} createBlank={this.createBlank} loadRecipe={this.loadRecipe} cur_recipe={this.state.cur_recipe} />)}/>/>
           <Route path="/edit/:id" render={(props) => (<Edit {...props} delChange={this.delChange}
             simpleChange={this.simpleChange} arrayChange={this.arrayChange}
             loadRecipe={this.loadRecipe} createBlank={this.createBlank}
             cur_recipe={this.state.cur_recipe} updateRecipe={this.updateRecipe}
+            appendInput={this.appendInput} addRecipe={this.addRecipe}
+          /> )}/>/>
+          <Route path="/add" render={(props) => (<Edit {...props} delChange={this.delChange}
+            simpleChange={this.simpleChange} arrayChange={this.arrayChange}
+            loadRecipe={this.loadRecipe} createBlank={this.createBlank}
+            cur_recipe={this.state.cur_recipe} updateRecipe={this.updateRecipe}
+            appendInput={this.appendInput} addRecipe={this.addRecipe}
           /> )}/>/>
           <Route render={(props) => (<NotFound />)} />
         </Switch>

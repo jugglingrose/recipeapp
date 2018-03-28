@@ -48,6 +48,7 @@ class Add extends React.Component{
                   <div className="ing-form">
                     <div className="ing-input">
                       <input type="text" ref={(input) => { this.ingredient = input }} name="ingredient" placeholder="Ingredient"></input>
+
                       <div className="input-group-button ing-btn">
                         <button className="delete-btn">
                           <i className="fa fa-trash"></i>
