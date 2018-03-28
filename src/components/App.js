@@ -24,6 +24,7 @@ class App extends React.Component {
     this.updateRecipe = this.updateRecipe.bind(this);
     this.appendInput = this.appendInput.bind(this);
     this.addRecipe = this.addRecipe.bind(this);
+    this.delRecipe = this.delRecipe.bind(this);
 
     //initialize state//
     this.state={
@@ -47,6 +48,15 @@ class App extends React.Component {
     this.setState({cur_recipe: blank});
   }
 
+  delRecipe(id){
+    console.log("delete recipe called");
+    fetch("http://localhost:4000/recipe/" + id, {
+      method: 'DELETE',
+    })
+    /*after delete, we call createBlank to clear the form*/
+    this.createBlank();
+  }
+
   addRecipe(data){
     console.log("add recipe called" + data);
     fetch("http://localhost:4000/recipe", {
@@ -60,6 +70,9 @@ class App extends React.Component {
     .then(res => {
       console.log("new recipe has been added successfully", res)
     });
+    /*after we successfully add a recipe we redirect to our home page*/
+    /*window.location.href = "http://localhost:3000/";*/
+
   }
 
   updateRecipe(id, data) {
@@ -99,18 +112,7 @@ class App extends React.Component {
       });
     }
 
-
-  /*addRecipe(recipe){
-    //update our state
-    //make a copy of our state first//
-    const recipes = {...this.state.recipes};
-    //add in our new fish
-    const timestamp = Date.now();
-    recipes[`recipe-${timestamp}`] = recipe;
-    //set state
-    this.setState({recipes: recipes});
-  }*/
-
+  //Make changes to the input fields of title, time, and desc//
   simpleChange = (fieldName) => (e) => {
     console.log("title change called");
     const value = e.target.value;
@@ -120,6 +122,7 @@ class App extends React.Component {
     this.setState({ cur_recipe : cur_recipe});
     }
 
+  //make change to the input fields of ingredient and instruction
   arrayChange = (fieldName, index) => (e) => {
     console.log("array change called");
     const cur_recipe = {...this.state.cur_recipe};
@@ -138,15 +141,17 @@ class App extends React.Component {
 
   }
 
-  appendInput(){
+  /*Onclick calls appendInput to add an additional input field.*/
+  appendInput(fieldName){
     console.log("append input called")
     const cur_recipe = {...this.state.cur_recipe};
     var newIngInput = [""];
-    const ingInputs = cur_recipe.ingredient.concat(newIngInput);
-    cur_recipe.ingredient = ingInputs;
+    const ingInputs = cur_recipe[fieldName].concat(newIngInput);
+    cur_recipe[fieldName] = ingInputs;
     this.setState({ cur_recipe : cur_recipe});
   }
 
+  //render our different routes//
   render() {
     return (
       <div>
@@ -159,6 +164,7 @@ class App extends React.Component {
             loadRecipe={this.loadRecipe} createBlank={this.createBlank}
             cur_recipe={this.state.cur_recipe} updateRecipe={this.updateRecipe}
             appendInput={this.appendInput} addRecipe={this.addRecipe}
+            delRecipe={this.delRecipe}
           /> )}/>/>
           <Route path="/add" render={(props) => (<Edit {...props} delChange={this.delChange}
             simpleChange={this.simpleChange} arrayChange={this.arrayChange}
