@@ -1,10 +1,11 @@
 import React from 'react';
-import {Container, Row, Col} from 'reactstrap';
+import PropTypes from 'prop-types';
+
 
 class Ingredient extends React.Component{
   render(){
 
-    var recipeId = this.props.recipeId;
+    /*var recipeId = this.props.recipeId;*/
     var ingId = this.props.ingId;
 
   return(
@@ -20,5 +21,11 @@ class Ingredient extends React.Component{
   )
   }
 }
+
+Ingredient.propTypes = {
+  delChange: PropTypes.func,
+  ing: PropTypes.string
+
+};
 
 export default Ingredient;

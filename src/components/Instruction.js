@@ -1,10 +1,11 @@
 import React from "react";
-import {Container, Row, Col} from "reactstrap";
+import {Row, Col} from "reactstrap";
+import PropTypes from 'prop-types';
 
 class Instruction extends React.Component{
   render(){
 
-    const recipeId = this.props.recipeId;
+    /*const recipeId = this.props.recipeId;*/
     const instructionId = this.props.instructionId;
 
     return(
@@ -33,6 +34,13 @@ class Instruction extends React.Component{
     )
   }
 }
+
+Instruction.propTypes = {
+  instructionId: PropTypes.number,
+  instruction: PropTypes.string,
+  delChange: PropTypes.func,
+  arrayChange: PropTypes.func
+};
 
 
 export default Instruction;

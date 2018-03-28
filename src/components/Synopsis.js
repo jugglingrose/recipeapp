@@ -2,6 +2,7 @@ import React from 'react';
 import {Row, Col} from 'reactstrap';
 import { Link } from 'react-router-dom';
 
+
 class Synopsis extends React.Component{
   render() {
     return(

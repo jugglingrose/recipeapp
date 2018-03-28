@@ -1,6 +1,7 @@
 import React from 'react';
 import {Container, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class FullRecipe extends React.Component {
 
@@ -33,7 +34,7 @@ class FullRecipe extends React.Component {
       <Container fluid={true}>
         <Row>
           <Col xs="12" md={{ size: 10, offset: 1}} lg={{ size: 6, offset: 3}} className="recipe-img">
-                <img src={require('../assets/img/food_blur.jpg')} />
+                <img src={require('../assets/img/food_blur.jpg')} alt="food"/>
           </Col>
         </Row>
         <Row>
@@ -102,5 +103,11 @@ class FullRecipe extends React.Component {
     )
   }
 }
+
+FullRecipe.propTypes = {
+  createBlank: PropTypes.func,
+  loadRecipe: PropTypes.func,
+  cur_recipe: PropTypes.object,
+};
 
 export default FullRecipe;

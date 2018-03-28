@@ -2,6 +2,7 @@ import React from 'react';
 import {Container, Row, Col} from 'reactstrap';
 import Ingredient from './Ingredient';
 import Instruction from './Instruction';
+import PropTypes from 'prop-types';
 
 
 class Edit extends React.Component{
@@ -115,5 +116,18 @@ class Edit extends React.Component{
     );
   }
 }
+
+Edit.propTypes = {
+  addRecipe: PropTypes.func,
+  updateRecipe: PropTypes.func,
+  createBlank: PropTypes.func,
+  loadRecipe: PropTypes.func,
+  cur_recipe: PropTypes.object,
+  simpleChange: PropTypes.func,
+  delChange: PropTypes.func,
+  appendInput: PropTypes.func
+
+};
+
 
 export default Edit;

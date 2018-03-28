@@ -2,6 +2,8 @@ import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import Synopsis from './Synopsis';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 
 class Landing extends React.Component{
 
@@ -51,6 +53,13 @@ class Landing extends React.Component{
     );
   }
 }
+
+Landing.propTypes = {
+  loadRecipes: PropTypes.func,
+
+};
+
+
 
 
 export default Landing;
