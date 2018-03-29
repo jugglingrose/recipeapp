@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 
+
 import Nav from './Nav';
 import Footer from './Footer';
 import Landing from './Landing';
@@ -57,7 +58,7 @@ class App extends React.Component {
     this.createBlank();
   }
 
-  addRecipe(data){
+  addRecipe(data, callback){
     console.log("add recipe called" + data);
     fetch("http://localhost:4000/recipe", {
       method: 'PUT',
@@ -68,14 +69,17 @@ class App extends React.Component {
     })
     .then(res => res.json())
     .then(res => {
-      console.log("new recipe has been added successfully", res)
+      console.log("new recipe has been added successfully", res);
+      /*we use the callback to access push history inside of our edit component.
+      We do not have access ot our history.push inside the app itself because
+      it isn't part of the routing*/
+      callback();
     });
-    /*after we successfully add a recipe we redirect to our home page*/
-    /*window.location.href = "http://localhost:3000/";*/
+
 
   }
 
-  updateRecipe(id, data) {
+  updateRecipe(id, data, callback) {
     console.log("update recipe is being called");
     fetch("http://localhost:4000/recipe/" + id, {
       method: 'POST',
@@ -86,6 +90,7 @@ class App extends React.Component {
     }).then(res => res.json())
     .then(res => {
       console.log("recipe has been updated", res)
+      callback();
     });
   }
 

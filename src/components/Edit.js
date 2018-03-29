@@ -5,6 +5,7 @@ import Instruction from './Instruction';
 import PropTypes from 'prop-types';
 
 
+
 class Edit extends React.Component{
   constructor() {
     super();
@@ -40,10 +41,16 @@ class Edit extends React.Component{
     addEdit(id, recipe){
       console.log("add/edit called");
       if(id === undefined){
-        this.props.addRecipe(recipe);
+        this.props.addRecipe(recipe, () => {
+          this.props.history.push('/');
+        });
+
       }
       else{
-        this.props.updateRecipe(id, recipe);
+        this.props.updateRecipe(id, recipe, () => {
+          /*pass function to redirect page after submtting*/
+          this.props.history.push('/');
+        });
       }
     }
 
