@@ -33,7 +33,7 @@ class Login extends React.Component {
               <input className="btm-margin" type="text" name="username" placeholder="USERNAME"></input>
               <input className="btm-margin" type="email" name="email" placeholder="EMAIL"></input>
               <input className="btm-margin" type="password" name="password" placeholder="PASSWORD"></input>
-              <input type="password" name="verify-password" placeholder="VERIFY PASSWORD"></input>
+            
             </Col>
           </Row>
           <Row>

@@ -1,21 +1,20 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-
-
 import Nav from './Nav';
 import Footer from './Footer';
 import Landing from './Landing';
 import FullRecipe from './FullRecipe';
 import Edit from './Edit';
 import NotFound from './NotFound';
+import Login from './Login';
 
-
+var recipesUrl = "http://localhost:4000/recipes/";
+var recipeUrl = "http://localhost:4000/recipe/";
 
 class App extends React.Component {
   constructor() {
     super();
-
     this.simpleChange = this.simpleChange.bind(this);
     this.arrayChange = this.arrayChange.bind(this);
     this.delChange = this.delChange.bind(this);
@@ -34,6 +33,11 @@ class App extends React.Component {
     }
   }
 
+  //var recipesUrl = "https://us-central1-recipe-cg.cloudfunctions.net/api_v1/recipes";
+  //var recipeUrl = "https://us-central1-recipe-cg.cloudfunctions.net/api_v1/recipe/";
+
+
+
   //call to clear the state.  Also, so when full recipe loads it will be blank
   //until the data fills in.  Otherwsie, Full Recipe won't work as the async call
   //comes in as undefined when render loads.
@@ -51,7 +55,7 @@ class App extends React.Component {
 
   delRecipe(id){
     console.log("delete recipe called");
-    fetch("http://localhost:4000/recipe/" + id, {
+    fetch( recipeUrl + id, {
       method: 'DELETE',
     })
     /*after delete, we call createBlank to clear the form*/
@@ -60,7 +64,7 @@ class App extends React.Component {
 
   addRecipe(data, callback){
     console.log("add recipe called" + data);
-    fetch("http://localhost:4000/recipe", {
+    fetch(recipeUrl, {
       method: 'PUT',
       body: JSON.stringify(data),
       headers: new Headers({
@@ -81,7 +85,7 @@ class App extends React.Component {
 
   updateRecipe(id, data, callback) {
     console.log("update recipe is being called");
-    fetch("http://localhost:4000/recipe/" + id, {
+    fetch( recipeUrl + id, {
       method: 'POST',
       body: JSON.stringify(data),
       headers: new Headers({
@@ -96,7 +100,7 @@ class App extends React.Component {
 
   loadRecipe(id) {
     console.log("loading a single recipe...");
-    fetch("http://localhost:4000/recipe/" + id)
+    fetch( recipeUrl + id)
     .then(data => data.json())
     .then(data => {
       console.log("recipe has been fetched", data.title);
@@ -107,7 +111,7 @@ class App extends React.Component {
     /* This function is responsible for getting our recipes from our backend*/
     loadRecipes() {
       console.log("loading recipes...");
-      fetch("http://localhost:4000/recipes")
+      fetch( recipesUrl)
       .then(data => data.json())
       .then(data => {
         console.log("recipes have been fetched", data);
