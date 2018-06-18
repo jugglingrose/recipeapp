@@ -13,6 +13,7 @@ import EnsureLoggedIn from './EnsureLoggedIn';
 var recipesUrl = "http://localhost:4000/recipes/";
 var recipeUrl = "http://localhost:4000/recipe/";
 var loginUrl = "http://localhost:4000/login/";
+var signupUrl = "http://localhost:4000/signup";
 
 class App extends React.Component {
   constructor() {
@@ -178,7 +179,7 @@ class App extends React.Component {
   //call backend API to add a new user from the sign up form on Login.JS//
   addNewUser(data, callback){
     console.log("add new user called" + data);
-    fetch(loginUrl, {
+    fetch(signupUrl, {
       method: 'PUT',
       body: JSON.stringify(data),
       headers: new Headers({
