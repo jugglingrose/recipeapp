@@ -8,13 +8,16 @@ import FullRecipe from './FullRecipe';
 import Edit from './Edit';
 import NotFound from './NotFound';
 import Login from './Login';
+import EnsureLoggedIn from './EnsureLoggedIn';
 
 var recipesUrl = "http://localhost:4000/recipes/";
 var recipeUrl = "http://localhost:4000/recipe/";
+var loginUrl = "http://localhost:4000/login/";
 
 class App extends React.Component {
   constructor() {
     super();
+    //bind methods//ß
     this.simpleChange = this.simpleChange.bind(this);
     this.arrayChange = this.arrayChange.bind(this);
     this.delChange = this.delChange.bind(this);
@@ -25,12 +28,25 @@ class App extends React.Component {
     this.appendInput = this.appendInput.bind(this);
     this.addRecipe = this.addRecipe.bind(this);
     this.delRecipe = this.delRecipe.bind(this);
+    this.addNewUser = this.addNewUser.bind(this);
 
     //initialize state//
     this.state={
       cur_recipe:{},
-      recipes:{}
+      recipes:{},
+      authed: false,
     }
+  }
+
+  componentDidMount(){
+    fetch(loginUrl)
+    .then(data => data.json())
+    .then(data => {
+      console.log("authed", data);
+      const authed = {...this.state.authed};
+      this.setState({authed: data});
+      console.log("authed:" + this.state.authed);
+    });
   }
 
   //var recipesUrl = "https://us-central1-recipe-cg.cloudfunctions.net/api_v1/recipes";
@@ -75,12 +91,10 @@ class App extends React.Component {
     .then(res => {
       console.log("new recipe has been added successfully", res);
       /*we use the callback to access push history inside of our edit component.
-      We do not have access ot our history.push inside the app itself because
+      We do not have access to our history.push inside the app itself because
       it isn't part of the routing*/
       callback();
     });
-
-
   }
 
   updateRecipe(id, data, callback) {
@@ -160,6 +174,27 @@ class App extends React.Component {
     this.setState({ cur_recipe : cur_recipe});
   }
 
+  /* ------- Log In Methods ----------------*/
+  //call backend API to add a new user from the sign up form on Login.JS//
+  addNewUser(data, callback){
+    console.log("add new user called" + data);
+    fetch(loginUrl, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    })
+    .then(res => res.json())
+    .then(res => {
+      console.log("new user has been added successfully", res);
+      /*we use the callback to access push history inside of our edit component.
+      We do not have access to our history.push inside the app itself because
+      it isn't part of the routing*/
+      callback();
+    });
+  }
+
   //render our different routes//
   render() {
     return (
@@ -167,20 +202,24 @@ class App extends React.Component {
         <Nav />
         <Switch>
           <Route exact path="/" render={(props) => (<Landing {...props} loadRecipes = {this.loadRecipes} recipes={this.state.recipes} />)}/>/>
+          <Route path="/login" render={(props) => (<Login {...props} addNewUser={this.addNewUser} />)} />
           <Route path="/full/:id" render={(props) => (<FullRecipe {...props} createBlank={this.createBlank} loadRecipe={this.loadRecipe} cur_recipe={this.state.cur_recipe} />)}/>/>
-          <Route path="/edit/:id" render={(props) => (<Edit {...props} delChange={this.delChange}
-            simpleChange={this.simpleChange} arrayChange={this.arrayChange}
-            loadRecipe={this.loadRecipe} createBlank={this.createBlank}
-            cur_recipe={this.state.cur_recipe} updateRecipe={this.updateRecipe}
-            appendInput={this.appendInput} addRecipe={this.addRecipe}
-            delRecipe={this.delRecipe}
-          /> )}/>/>
-          <Route path="/add" render={(props) => (<Edit {...props} delChange={this.delChange}
-            simpleChange={this.simpleChange} arrayChange={this.arrayChange}
-            loadRecipe={this.loadRecipe} createBlank={this.createBlank}
-            cur_recipe={this.state.cur_recipe} updateRecipe={this.updateRecipe}
-            appendInput={this.appendInput} addRecipe={this.addRecipe}
-          /> )}/>/>
+          //wrap routes that require authentication in a component//
+          <Route component={EnsureLoggedIn} authed ={this.state.authed} >
+            <Route path="/edit/:id" render={(props) => (<Edit {...props} delChange={this.delChange}
+              simpleChange={this.simpleChange} arrayChange={this.arrayChange}
+              loadRecipe={this.loadRecipe} createBlank={this.createBlank}
+              cur_recipe={this.state.cur_recipe} updateRecipe={this.updateRecipe}
+              appendInput={this.appendInput} addRecipe={this.addRecipe}
+              delRecipe={this.delRecipe}
+            /> )} />
+            <Route path="/add" render={(props) => (<Edit {...props} delChange={this.delChange}
+              simpleChange={this.simpleChange} arrayChange={this.arrayChange}
+              loadRecipe={this.loadRecipe} createBlank={this.createBlank}
+              cur_recipe={this.state.cur_recipe} updateRecipe={this.updateRecipe}
+              appendInput={this.appendInput} addRecipe={this.addRecipe}
+            /> )} />
+          </Route>
           <Route render={(props) => (<NotFound />)} />
         </Switch>
         <Footer />

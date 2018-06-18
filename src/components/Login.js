@@ -2,6 +2,17 @@ import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 
 class Login extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      name: "",
+      email: "",
+      password: "",
+    }
+  }
+
+
   render(){
     return (
       <div id="login-page">
@@ -14,8 +25,8 @@ class Login extends React.Component {
           </Row>
           <Row>
             <Col xs="12" md={{ size: 6, offset: 3 }}>
-              <input className="btm-margin" type="text" name="username" placeholder="USERNAME"></input>
-              <input type="text" name="username" placeholder="PASSWORD"></input>
+              <input className="btm-margin" type="text" name="username" placeholder="USERNAME" required></input>
+              <input type="text" name="username" placeholder="PASSWORD" required ></input>
             </Col>
           </Row>
           <Row>
@@ -30,15 +41,15 @@ class Login extends React.Component {
           </Row>
           <Row>
             <Col xs="12" md={{ size: 6, offset: 3 }}>
-              <input className="btm-margin" type="text" name="username" placeholder="USERNAME"></input>
-              <input className="btm-margin" type="email" name="email" placeholder="EMAIL"></input>
-              <input className="btm-margin" type="password" name="password" placeholder="PASSWORD"></input>
-            
+              <input className="btm-margin" type="text" name="username" placeholder="USERNAME" required></input>
+              <input className="btm-margin" type="email" name="email" placeholder="EMAIL" required></input>
+              <input className="btm-margin" type="password" name="password" placeholder="PASSWORD" required></input>
             </Col>
           </Row>
           <Row>
             <Col xs="12" className="text-center">
-              <button className="add-btn" type="button">CREATE</button>
+          
+              <button onClick={() => {this.addNewUser()}} className="add-btn" type="button">CREATE</button>
             </Col>
           </Row>
         </Container>
