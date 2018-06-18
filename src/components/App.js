@@ -30,6 +30,7 @@ class App extends React.Component {
     this.addRecipe = this.addRecipe.bind(this);
     this.delRecipe = this.delRecipe.bind(this);
     this.addNewUser = this.addNewUser.bind(this);
+    this.loginUser = this.loginUser.bind(this);
 
     //initialize state//
     this.state={
@@ -196,6 +197,21 @@ class App extends React.Component {
     });
   }
 
+  loginUser(data, callback) {
+    console.log("loginUser called");
+    fetch( loginUrl, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    }).then(res => res.json())
+    .then(res => {
+      console.log("logged in", res)
+      callback();
+    });
+  }
+
   //render our different routes//
   render() {
     return (
@@ -203,7 +219,7 @@ class App extends React.Component {
         <Nav />
         <Switch>
           <Route exact path="/" render={(props) => (<Landing {...props} loadRecipes = {this.loadRecipes} recipes={this.state.recipes} />)}/>/>
-          <Route path="/login" render={(props) => (<Login {...props} addNewUser={this.addNewUser} />)} />
+          <Route path="/login" render={(props) => (<Login {...props} addNewUser={this.addNewUser} loginUser={this.loginUser} />)} />
           <Route path="/full/:id" render={(props) => (<FullRecipe {...props} createBlank={this.createBlank} loadRecipe={this.loadRecipe} cur_recipe={this.state.cur_recipe} />)}/>/>
           //wrap routes that require authentication in a component//
           <Route component={EnsureLoggedIn} authed ={this.state.authed} >

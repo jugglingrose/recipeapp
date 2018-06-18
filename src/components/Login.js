@@ -4,24 +4,34 @@ import { Container, Row, Col } from 'reactstrap';
 class Login extends React.Component {
   constructor(props){
     super(props);
-    this.loginFieldChange = this.loginFieldChange.bind(this);
+    this.newFieldChange = this.newFieldChange.bind(this);
+    this.loginFeldChange = this.loginFieldChange.bind(this);
 
     this.state = {
       /*name: "",
       email: "",
       password: "",*/
-      User: {},
+      userLogin: {},
+      newUser: {},
     }
   }
 
+  //Update userLogin State when user types into the LogIn Fields//
   loginFieldChange = (fieldName) => (e) => {
     const value = e.target.value;
-    const User = {...this.state.User};
-    User[fieldName] = value;
-    console.log(User);
-    this.setState({ User : User});
+    const userLogin = {...this.state.userLogin};
+    userLogin[fieldName] = value;
+    console.log(userLogin);
+    this.setState({ userLogin : userLogin});
   }
-
+  //Update newUser State when user types into the signUp Fields//
+  newFieldChange = (fieldName) => (e) => {
+    const value = e.target.value;
+    const newUser = {...this.state.newUser};
+    newUser[fieldName] = value;
+    console.log(newUser);
+    this.setState({ newUser : newUser});
+  }
 
   render(){
     return (
@@ -35,13 +45,13 @@ class Login extends React.Component {
           </Row>
           <Row>
             <Col xs="12" md={{ size: 6, offset: 3 }}>
-              <input className="btm-margin" type="text" name="username" placeholder="USERNAME" required></input>
-              <input type="text" name="username" placeholder="PASSWORD" required ></input>
+              <input className="btm-margin" type="text" name="username" placeholder="USERNAME" onChange={this.loginFieldChange("username")} required></input>
+              <input type="text" name="username" placeholder="PASSWORD" onChange={this.loginFieldChange("password")} required ></input>
             </Col>
           </Row>
           <Row>
             <Col xs="12" className="text-center">
-              <button className="add-btn" type="button">ENTER</button>
+              <button onClick={()=> {this.props.loginUser(this.state.userLogin)}} className="add-btn" type="button">ENTER</button>
             </Col>
           </Row>
           <Row>
@@ -51,15 +61,15 @@ class Login extends React.Component {
           </Row>
           <Row>
             <Col xs="12" md={{ size: 6, offset: 3 }}>
-              <input className="btm-margin" type="text" name="username" placeholder="USERNAME" onChange={this.loginFieldChange("username")} required></input>
-              <input className="btm-margin" type="email" name="email" placeholder="EMAIL" required></input>
-              <input className="btm-margin" type="password" name="password" placeholder="PASSWORD" required></input>
+              <input className="btm-margin" type="text" name="username" placeholder="USERNAME" onChange={this.newFieldChange("username")} required></input>
+              <input className="btm-margin" type="name" name="name" placeholder="NAME" onChange={this.newFieldChange("name")} required></input>
+              <input className="btm-margin" type="password" name="password" placeholder="PASSWORD" onChange={this.newFieldChange("password")}   required></input>
             </Col>
           </Row>
           <Row>
             <Col xs="12" className="text-center">
 
-              <button onClick={() => {this.props.addNewUser(this.state.User)}} className="add-btn" type="button">CREATE</button>
+              <button onClick={() => {this.props.addNewUser(this.state.newUser)}} className="add-btn" type="button">CREATE</button>
             </Col>
           </Row>
         </Container>
