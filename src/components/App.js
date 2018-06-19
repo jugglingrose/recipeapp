@@ -47,6 +47,7 @@ class App extends React.Component {
       console.log("authed", data);
       const authed = {...this.state.authed};
       this.setState({authed: data});
+      console.log("componentDidMount");
       console.log("authed:" + this.state.authed);
     });
   }
@@ -208,6 +209,9 @@ class App extends React.Component {
     }).then(res => res.json())
     .then(res => {
       console.log("logged in", res)
+      const authed = {...this.state.authed};
+      this.setState({authed: res});
+      console.log("authed:" + this.state.authed);
       /*callback();*/
     });
   }
