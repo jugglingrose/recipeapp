@@ -41,7 +41,9 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    fetch(loginUrl)
+    fetch(loginUrl, {
+      credentials: 'include',
+    })
     .then(data => data.json())
     .then(data => {
       console.log("authed", data);
@@ -75,6 +77,7 @@ class App extends React.Component {
   delRecipe(id){
     console.log("delete recipe called");
     fetch( recipeUrl + id, {
+      credentials: 'include',
       method: 'DELETE',
     })
     /*after delete, we call createBlank to clear the form*/
@@ -85,6 +88,7 @@ class App extends React.Component {
     console.log("add recipe called" + data);
     fetch(recipeUrl, {
       method: 'PUT',
+      credentials: 'include',
       body: JSON.stringify(data),
       headers: new Headers({
         'Content-Type': 'application/json'
@@ -104,6 +108,7 @@ class App extends React.Component {
     console.log("update recipe is being called");
     fetch( recipeUrl + id, {
       method: 'POST',
+      credentials: 'include',
       body: JSON.stringify(data),
       headers: new Headers({
         'Content-Type': 'application/json'
@@ -117,7 +122,9 @@ class App extends React.Component {
 
   loadRecipe(id) {
     console.log("loading a single recipe...");
-    fetch( recipeUrl + id)
+    fetch( recipeUrl + id, {
+      credentials: 'include',
+    })
     .then(data => data.json())
     .then(data => {
       console.log("recipe has been fetched", data.title);
@@ -128,7 +135,9 @@ class App extends React.Component {
     /* This function is responsible for getting our recipes from our backend*/
     loadRecipes() {
       console.log("loading recipes...");
-      fetch( recipesUrl)
+      fetch( recipesUrl, {
+        credentials: 'include',
+      })
       .then(data => data.json())
       .then(data => {
         console.log("recipes have been fetched", data);
@@ -183,6 +192,7 @@ class App extends React.Component {
     console.log("add new user called" + data);
     fetch(signupUrl, {
       method: 'PUT',
+      credentials: 'include',
       body: JSON.stringify(data),
       headers: new Headers({
         'Content-Type': 'application/json'
@@ -202,6 +212,7 @@ class App extends React.Component {
     console.log("loginUser called");
     fetch( loginUrl, {
       method: 'POST',
+      credentials: 'include',
       body: JSON.stringify(data),
       headers: new Headers({
         'Content-Type': 'application/json'
