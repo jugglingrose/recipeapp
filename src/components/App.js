@@ -15,6 +15,7 @@ var recipesUrl = "http://localhost:4000/recipes/";
 var recipeUrl = "http://localhost:4000/recipe/";
 var loginUrl = "http://localhost:4000/login/";
 var signupUrl = "http://localhost:4000/signup";
+var logoutUrl = "http://localhost:4000/logout";
 
 class App extends React.Component {
   constructor() {
@@ -227,6 +228,21 @@ class App extends React.Component {
       /*callback();*/
     });
   }
+
+  logOut() {
+    console.log("logout user called");
+    fetch(logoutUrl, {
+      credentials: 'include',
+    })
+    .then(data => data.json())
+    .then(data => {
+      console.log(data);
+      const authed = {...this.state.authed};
+      this.setState({authed: res});
+      console.log("authed:" + this.state.authed);
+    });
+  }
+
 
   //render our different routes//
   render() {
