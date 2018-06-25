@@ -27,7 +27,7 @@ class DropDown extends React.Component {
             ? (
               <div className="dd-menu">
                 <ul>
-                  <li>Log Out</li>
+                  <li><button type="button" onClick={this.logOut}>Log Out</button></li>
                 </ul>
               </div>
             )

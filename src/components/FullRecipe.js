@@ -14,7 +14,6 @@ class FullRecipe extends React.Component {
     this.props.loadRecipe(this.props.match.params.id);
   }
 
-
   render(){
     console.log("JANITHA render of FullRecipe");
 

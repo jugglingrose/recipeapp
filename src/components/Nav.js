@@ -38,7 +38,7 @@ class Nav extends React.Component {
                 <li className="settings"><i className="fa fa-cog"></i></li>
               </ul>*/}
               <DropDown />
-          
+
             </div>
           </nav>
 
