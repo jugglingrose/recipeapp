@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import DropDown from './DropDown';
 
 class Nav extends React.Component {
   render() {
@@ -32,11 +33,12 @@ class Nav extends React.Component {
               </ul>
             </div>
 
-            <div className="perm-nav">
-              <ul>
+            {/*<div className="perm-nav">*/}
+              {/*<ul>
                 <li className="settings"><i className="fa fa-cog"></i></li>
-              </ul>
-            </div>
+              </ul>*/}
+              <DropDown />
+          
             </div>
           </nav>
 

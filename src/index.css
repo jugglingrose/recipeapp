@@ -9,7 +9,6 @@ url("./assets/font/playfairdisplay-regular-webfont.ttf") format("truetype"),
 url("./assets/font/playfairdisplay-regular-webfont.svg") format("svg");
 }
 
-
 @font-face {
 font-family: "playfairB";
 src: url("./assets/font/playfairdisplaysc-bold-webfont.eot");
@@ -61,6 +60,7 @@ p{
   background-color: #ff960e;
   padding-left: 20px;
   padding-right: 20px;
+  position: relative;
 }
 
 .navbar-header{
@@ -128,17 +128,33 @@ i.fa.fa-cog::before{
   padding-top: 3px;
 }
 
-.perm-nav{
+.dd-button-wrap{
   display: inline-block;
-  float: right;
+  position: absolute;
+  top: 12px;
+  right: 20px;
+}
+
+.dd-button-wrap button{
+  background-color: #ff960e;
+}
+
+.dd-menu{
+  background-color: #ff960e;
+  width: 100px;
+  position: absolute;
+  right: 0px;
+}
+
+.dd-menu li{
+  display: block;
+  padding-left: 10px;
+  color: white;
 }
 
 #search{
   display: none;
 }
-
-
-
 
 /*-------------------------------------------------------------*/
 /* LANDING */
