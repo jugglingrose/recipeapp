@@ -236,8 +236,9 @@ class App extends React.Component {
           <Route exact path="/" render={(props) => (<Landing {...props} loadRecipes = {this.loadRecipes} recipes={this.state.recipes} />)}/>/>
           <Route path="/login" render={(props) => (<Login {...props} addNewUser={this.addNewUser} loginUser={this.loginUser} />)} />
           <Route path="/full/:id" render={(props) => (<FullRecipe {...props} createBlank={this.createBlank} loadRecipe={this.loadRecipe} cur_recipe={this.state.cur_recipe} />)}/>/>
-          //wrap routes that require authentication in a component//
-          <Route component={EnsureLoggedIn} authed ={this.state.authed} >
+          {/*//wrap routes that require authentication in a component//*/}
+          {/*}<Route component={EnsureLoggedIn} authed={this.state.authed} > */}
+          <EnsureLoggedIn authed={this.state.authed}>
             <Route path="/edit/:id" render={(props) => (<Edit {...props} delChange={this.delChange}
               simpleChange={this.simpleChange} arrayChange={this.arrayChange}
               loadRecipe={this.loadRecipe} createBlank={this.createBlank}
@@ -251,7 +252,7 @@ class App extends React.Component {
               cur_recipe={this.state.cur_recipe} updateRecipe={this.updateRecipe}
               appendInput={this.appendInput} addRecipe={this.addRecipe}
             /> )} />
-          </Route>
+          </EnsureLoggedIn>
           <Route render={(props) => (<NotFound />)} />
         </Switch>
         <Footer />
