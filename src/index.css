@@ -144,12 +144,14 @@ i.fa.fa-cog::before{
   width: 100px;
   position: absolute;
   right: 0px;
-}
-
-.dd-menu li{
-  display: block;
+  z-index: 1;
+  top: 50px;
   padding-left: 10px;
   color: white;
+}
+
+.dd-menu ul{
+  width: 100px;
 }
 
 #search{

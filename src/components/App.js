@@ -248,7 +248,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Nav />
+        <Nav logOut={this.logOut} authed={this.state.authed} />
         <Switch>
           <Route exact path="/" render={(props) => (<Landing {...props} loadRecipes = {this.loadRecipes} recipes={this.state.recipes} />)}/>/>
           <Route path="/login" render={(props) => (<Login {...props} addNewUser={this.addNewUser} loginUser={this.loginUser} />)} />

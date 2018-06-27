@@ -37,7 +37,7 @@ class Nav extends React.Component {
               {/*<ul>
                 <li className="settings"><i className="fa fa-cog"></i></li>
               </ul>*/}
-              <DropDown />
+              <DropDown logOut={this.props.logOut} authed={this.props.authed}/>
 
             </div>
           </nav>

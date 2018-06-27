@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class DropDown extends React.Component {
   constructor() {
@@ -26,10 +27,19 @@ class DropDown extends React.Component {
             this.state.showMenu
             ? (
               <div className="dd-menu">
-                <ul>
-                  <li><button type="button" onClick={this.logOut}>Log Out</button></li>
-                </ul>
+                {
+                  this.props.authed
+                  ? (
+                    <div className="dd-menu-divs" onClick={this.props.logOut}>Log Out</div>
+                  )
+                  :(
+                    <div className="dd-menu-divs"><Link to="/login">Log In</Link></div>
+                  )
+                }
+
               </div>
+
+
             )
             :(
               null
