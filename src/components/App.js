@@ -35,12 +35,15 @@ class App extends React.Component {
     this.addNewUser = this.addNewUser.bind(this);
     this.loginUser = this.loginUser.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.setLoginRedirect = this.setLoginRedirect.bind(this);
+
 
     //initialize state//
     this.state={
       cur_recipe:{},
       recipes:{},
       authed: false,
+      loginRedirect: undefined,
     }
   }
 
@@ -191,6 +194,11 @@ class App extends React.Component {
   }
 
   /* ------- Log In Methods ----------------*/
+  setLoginRedirect(url){
+    console.log("set login redirect call");
+    this.setState({loginRedirect: url});
+  }
+
   //call backend API to add a new user from the sign up form on Login.JS//
   addNewUser(data, callback){
     console.log("add new user called" + data);
@@ -227,7 +235,13 @@ class App extends React.Component {
       const authed = {...this.state.authed};
       this.setState({authed: res});
       console.log("authed:" + this.state.authed);
-      /*callback();*/
+      /*Callback*/
+      if(this.state.loginRedirect !== undefined){
+        var loginRedirectTemp = this.state.loginRedirect;
+        this.setState({loginRedirect: undefined});
+        callback(loginRedirectTemp);
+      }
+      callback(undefined);
     });
   }
 
@@ -251,11 +265,11 @@ class App extends React.Component {
         <Nav logOut={this.logOut} authed={this.state.authed} />
         <Switch>
           <Route exact path="/" render={(props) => (<Landing {...props} loadRecipes = {this.loadRecipes} recipes={this.state.recipes} />)}/>/>
-          <Route path="/login" render={(props) => (<Login {...props} addNewUser={this.addNewUser} loginUser={this.loginUser} />)} />
+          <Route path="/login" render={(props) => (<Login {...props} loginRedirect={this.state.loginRedirect} addNewUser={this.addNewUser} loginUser={this.loginUser} />)} />
           <Route path="/full/:id" render={(props) => (<FullRecipe {...props} createBlank={this.createBlank} loadRecipe={this.loadRecipe} cur_recipe={this.state.cur_recipe} />)}/>/>
           {/*//wrap routes that require authentication in a component//*/}
           {/*}<Route component={EnsureLoggedIn} authed={this.state.authed} > */}
-          <EnsureLoggedIn authed={this.state.authed}>
+          <EnsureLoggedIn authed={this.state.authed} setLoginRedirect={this.setLoginRedirect}>
             <Route path="/edit/:id" render={(props) => (<Edit {...props} delChange={this.delChange}
               simpleChange={this.simpleChange} arrayChange={this.arrayChange}
               loadRecipe={this.loadRecipe} createBlank={this.createBlank}

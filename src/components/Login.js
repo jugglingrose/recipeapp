@@ -1,11 +1,13 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
+import { Redirect } from 'react-router';
 
 class Login extends React.Component {
   constructor(props){
     super(props);
     this.newFieldChange = this.newFieldChange.bind(this);
     this.loginFeldChange = this.loginFieldChange.bind(this);
+    this.login = this.login.bind(this);
 
     this.state = {
       /*name: "",
@@ -16,6 +18,20 @@ class Login extends React.Component {
     }
   }
 
+  login = () => {
+    this.props.loginUser(this.state.userLogin,
+      (url) => {
+        console.log("redirected!")
+        /*If loginRedirect is NOT undefined*/
+        if(url !== undefined) {
+          this.props.history.push(url);
+        }
+        /*If loginRedirect is undefined*/
+        else{
+          this.props.history.push('/')
+        }
+      });
+  }
   //Update userLogin State when user types into the LogIn Fields//
   loginFieldChange = (fieldName) => (e) => {
     const value = e.target.value;
@@ -52,7 +68,7 @@ class Login extends React.Component {
           </Row>
           <Row>
             <Col xs="12" className="text-center">
-              <button onClick={()=> {this.props.loginUser(this.state.userLogin)}} className="add-btn" type="button">ENTER</button>
+              <button onClick={()=> {this.login()}} className="add-btn" type="button">ENTER</button>
             </Col>
           </Row>
           <Row>
