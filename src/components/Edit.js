@@ -55,6 +55,7 @@ class Edit extends React.Component{
     }
 
   render(){
+
     var ingredients = this.props.cur_recipe.ingredient || [];
     var instructions = this.props.cur_recipe.instruction || [];
     var cur_id = this.props.cur_recipe._id || " ";
@@ -77,11 +78,11 @@ class Edit extends React.Component{
               <Col xs="12" lg={{ size: 6, offset: 3}}>
                 <div className="add-form-group">
                   <input type="text"
-                    className="add-input" name="title" value={this.props.cur_recipe.title} onChange={this.props.simpleChange('title')}></input>
+                    className="add-input" name="title" placeholder="Title" value={this.props.cur_recipe.title} onChange={this.props.simpleChange('title')}></input>
                   <input type="text"
-                    className="add-input" name="time"  value={this.props.cur_recipe.time} onChange={this.props.simpleChange('time')}></input>
+                    className="add-input" name="time" placeholder="Time" value={this.props.cur_recipe.time} onChange={this.props.simpleChange('time')}></input>
                   <textarea className="desc-input"
-                    name="description" rows="4" columns="10"  value={this.props.cur_recipe.desc} onChange={this.props.simpleChange('desc')}></textarea>
+                    name="description" rows="4" columns="10" placeholder="Description" value={this.props.cur_recipe.desc} onChange={this.props.simpleChange('desc')}></textarea>
                   <div className="ing-form">
                     {
                       ingredients.map((ingredient, idx) =>

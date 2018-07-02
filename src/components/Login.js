@@ -34,6 +34,7 @@ class Login extends React.Component {
   }
 
   render(){
+    console.log("Checking props location", this.props.location);
     return (
       <div id="login-page">
         <Container fluid={true} className="login-contain">
@@ -68,7 +69,6 @@ class Login extends React.Component {
           </Row>
           <Row>
             <Col xs="12" className="text-center">
-
               <button onClick={() => {this.props.addNewUser(this.state.newUser)}} className="add-btn" type="button">CREATE</button>
             </Col>
           </Row>

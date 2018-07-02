@@ -70,10 +70,10 @@ class App extends React.Component {
     console.log("blank recipe called");
     const blank = {
       title: '',
-      time: 0,
+      time: '',
       desc: '',
-      ingredient: [ " "],
-      instruction: [ " "]
+      ingredient: [ ""],
+      instruction: [ ""]
     }
     this.setState({cur_recipe: blank});
   }

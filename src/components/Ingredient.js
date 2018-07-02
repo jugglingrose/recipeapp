@@ -10,7 +10,7 @@ class Ingredient extends React.Component{
 
   return(
     <div className="ing-input">
-      <input type="text" name="ingredient" value={this.props.ing}
+      <input placeholder="Ingredient" type="text" name="ingredient" value={this.props.ing}
         onChange={this.props.arrayChange('ingredient', ingId)}></input>
       <div className="input-group-button ing-btn">
         <button type="button" onClick={this.props.delChange('ingredient', ingId)} className="delete-btn">

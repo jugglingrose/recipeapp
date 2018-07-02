@@ -12,7 +12,7 @@ class Instruction extends React.Component{
       <Row>
         <Col xs="12" lg={{ size: 6, offset: 3}}>
           <div className="inst-grp">
-            <textarea type="text"  name="instruction" className="instruction"
+            <textarea type="text"  placeholder="Instruction" name="instruction" className="instruction"
               rows="4" columns="10" value={ this.props.instruction} onChange={this.props.arrayChange('instruction', instructionId)}></textarea>
             <div className="instruct-btn-grp">
               <div className="input-group-button">
