@@ -18,9 +18,13 @@ class Login extends React.Component {
     }
   }
 
+  login = () => {
+    this.props.loginUser(this.state.userLogin);
+  }
   /*When user has entered their login username and password, the login function
   will be called.  This function will pass the userLogin state and a url.  The url
-  is the url the react app will be redirected to once login is successful*/
+  is the url the react app will be redirected to once login is successful
+
   login = () => {
     this.props.loginUser(this.state.userLogin,
       (url) => {
@@ -34,7 +38,7 @@ class Login extends React.Component {
           this.props.history.push('/');
         }
       });
-  }
+  }*/
 
   //Update userLogin State when user types into the LogIn Fields//
   loginFieldChange = (fieldName) => (e) => {
