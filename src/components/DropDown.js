@@ -30,7 +30,7 @@ class DropDown extends React.Component {
                 {
                   this.props.authed
                   ? (
-                    <div className="dd-menu-divs" onClick={this.props.logOut}>Log Out</div>
+                    <div className="dd-menu-divs" onClick={ this.props.logOut }>Log Out</div>
                   )
                   :(
                     <div className="dd-menu-divs"><Link to="/login">Log In</Link></div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 
 
@@ -237,13 +237,16 @@ class App extends React.Component {
       const authed = {...this.state.authed};
       this.setState({authed: res});
       console.log("authed:" + this.state.authed);
-      /*Callback*/
-      if(this.state.loginRedirect !== undefined){
+      //If auth is true, redirect url//
+      if(this.state.authed === true){
+        callback();
+      }
+
+      /*if(this.state.loginRedirect !== undefined){
         var loginRedirectTemp = this.state.loginRedirect;
         this.setState({loginRedirect: undefined});
         callback(loginRedirectTemp);
-      }
-      callback(undefined);
+      }*/
     });
   }
 
@@ -258,6 +261,7 @@ class App extends React.Component {
       const authed = {...this.state.authed};
       this.setState({authed: res});
       console.log("authed:" + this.state.authed);
+
     });
   }
   //render our different routes//

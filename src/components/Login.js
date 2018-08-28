@@ -6,7 +6,7 @@ class Login extends React.Component {
   constructor(props){
     super(props);
     this.newFieldChange = this.newFieldChange.bind(this);
-    this.loginFeldChange = this.loginFieldChange.bind(this);
+    this.loginFieldChange = this.loginFieldChange.bind(this);
     this.login = this.login.bind(this);
 
     this.state = {
@@ -18,20 +18,24 @@ class Login extends React.Component {
     }
   }
 
+  /*When user has entered their login username and password, the login function
+  will be called.  This function will pass the userLogin state and a url.  The url
+  is the url the react app will be redirected to once login is successful*/
   login = () => {
     this.props.loginUser(this.state.userLogin,
       (url) => {
         console.log("redirected!")
-        /*If loginRedirect is NOT undefined*/
+        //If loginRedirect is NOT undefined
         if(url !== undefined) {
           this.props.history.push(url);
         }
-        /*If loginRedirect is undefined*/
+        //if loginRedirect is undefined
         else{
-          this.props.history.push('/')
+          this.props.history.push('/');
         }
       });
   }
+
   //Update userLogin State when user types into the LogIn Fields//
   loginFieldChange = (fieldName) => (e) => {
     const value = e.target.value;
@@ -80,7 +84,7 @@ class Login extends React.Component {
             <Col xs="12" md={{ size: 6, offset: 3 }}>
               <input className="btm-margin" type="text" name="username" placeholder="USERNAME" onChange={this.newFieldChange("username")} required></input>
               <input className="btm-margin" type="name" name="name" placeholder="NAME" onChange={this.newFieldChange("name")} required></input>
-              <input className="btm-margin" type="password" name="password" placeholder="PASSWORD" onChange={this.newFieldChange("password")}   required></input>
+              <input className="btm-margin" type="password" name="password" placeholder="PASSWORD" onChange={this.newFieldChange("password")} required></input>
             </Col>
           </Row>
           <Row>
