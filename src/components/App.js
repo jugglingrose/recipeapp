@@ -90,7 +90,7 @@ class App extends React.Component {
       method: 'DELETE',
     })
     /*after delete, we call createBlank to clear the form*/
-    this.createBlank();
+    this.props.history.push('/');
 
   }
 
@@ -240,6 +240,8 @@ class App extends React.Component {
       //If auth is true, redirect url//
       if(this.state.authed === true){
         this.props.history.push('/');
+      }else{
+        alert("username/password is incorrect or user doesn't exist");
       }
 
       /*if(this.state.loginRedirect !== undefined){
@@ -274,7 +276,7 @@ class App extends React.Component {
         <Nav logOut={this.logOut} authed={this.state.authed} />
         <Switch>
           <Route exact path="/" render={(props) => (<Landing {...props} loadRecipes = {this.loadRecipes} recipes={this.state.recipes} />)}/>/>
-          <Route path="/login" render={(props) => (<Login {...props} loginRedirect={this.state.loginRedirect} addNewUser={this.addNewUser} loginUser={this.loginUser} />)} />
+          <Route path="/login" render={(props) => (<Login {...props} /*loginRedirect={this.state.loginRedirect}*/ addNewUser={this.addNewUser} loginUser={this.loginUser} />)} />
           <Route path="/full/:id" render={(props) => (<FullRecipe {...props} createBlank={this.createBlank} loadRecipe={this.loadRecipe} cur_recipe={this.state.cur_recipe} />)}/>/>
           {/*//wrap routes that require authentication in a component//*/}
           {/*}<Route component={EnsureLoggedIn} authed={this.state.authed} > */}

@@ -37,7 +37,7 @@ class Edit extends React.Component{
     /*Save button onClick triggers the addEdit Function.  This function tests to
     see wether the form should call the updateRecipe function or the addRecipe
     function based on wether or not there is an id.  This allows us to use just one
-    compoenent to handle both the Add and Edit of our app. */
+    component to handle both the Add and Edit of our app. */
     addEdit(id, recipe){
       console.log("add/edit called");
       if(id === undefined){
@@ -49,7 +49,8 @@ class Edit extends React.Component{
       else{
         this.props.updateRecipe(id, recipe, () => {
           /*pass function to redirect page after submtting*/
-          this.props.history.push('/');
+          console.log("udpate recipe:" + id);
+          this.props.history.push(`/full/${id}`);
         });
       }
     }
