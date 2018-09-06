@@ -22,7 +22,7 @@ class Landing extends React.Component{
             </Col>
           </Row>
           <Row>
-            <Col xs="12">
+            <Col xs="12" md={{ size: 10, offset: 1}} lg={{ size: 6, offset: 3}}>
               <form>
                 <div className="search-group">
                   <div className="input-group-button">
@@ -30,7 +30,7 @@ class Landing extends React.Component{
                       <i className="fa fa-search"></i>
                     </button>
                   </div>
-                  <input type="text" className="navbar-search" name="search" placeholder="Search For Recipe" />
+                  <input type="text" className="navbar-search" name="search" placeholder="Search For Recipe" onChange={this.props.searchChange} />
                 </div>
               </form>
             </Col>

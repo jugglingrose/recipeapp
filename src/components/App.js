@@ -12,21 +12,21 @@ import NotFound from './NotFound';
 import Login from './Login';
 import EnsureLoggedIn from './EnsureLoggedIn';
 
+var rootUrl = "http://localhost:4000";
 
-var recipesUrl = "http://localhost:4000/recipes/";
-var recipeUrl = "http://localhost:4000/recipe/";
-var loginUrl = "http://localhost:4000/login/";
-var signupUrl = "http://localhost:4000/signup";
-var logoutUrl = "http://localhost:4000/logout";
+//var rootUrl = "https://us-central1-recipe-cg.cloudfunctions.net/api_v1";
+
+var recipesUrl = rootUrl + "/recipes";
+var recipeUrl = rootUrl + "/recipe/";
+var loginUrl =  rootUrl + "/login/";
+var signupUrl = rootUrl + "/signup";
+var logoutUrl = rootUrl + "/logout";
 
 
 class App extends React.Component {
   constructor() {
     super();
-    //bind methods//ß
-    this.simpleChange = this.simpleChange.bind(this);
-    this.arrayChange = this.arrayChange.bind(this);
-    this.delChange = this.delChange.bind(this);
+    //bind methods//
     this.loadRecipes = this.loadRecipes.bind(this);
     this.loadRecipe = this.loadRecipe.bind(this);
     this.createBlank = this.createBlank.bind(this);
@@ -46,6 +46,7 @@ class App extends React.Component {
       recipes:{},
       authed: false,
       loginRedirect: undefined,
+      search: {},
     }
   }
 
@@ -63,8 +64,6 @@ class App extends React.Component {
     });
   }
 
-  //var recipesUrl = "https://us-central1-recipe-cg.cloudfunctions.net/api_v1/recipes";
-  //var recipeUrl = "https://us-central1-recipe-cg.cloudfunctions.net/api_v1/recipe/";
 
 
 
@@ -91,7 +90,6 @@ class App extends React.Component {
     })
     /*after delete, we call createBlank to clear the form*/
     this.props.history.push('/');
-
   }
 
   addRecipe(data, callback){
@@ -156,15 +154,19 @@ class App extends React.Component {
       });
     }
 
+  searchChange = (e) => {
+    const value = e.target.value;
+    console.log(value);
+    const search = {...this.state.search};
+    this.setState({search : value})
+  }
   //Make changes to the input fields of title, time, and desc//
   simpleChange = (fieldName) => (e) => {
-    console.log("title change called");
     const value = e.target.value;
     const cur_recipe = {...this.state.cur_recipe};
     cur_recipe[fieldName] = value;
-    console.log(cur_recipe);
     this.setState({ cur_recipe : cur_recipe});
-    }
+  }
 
   //make change to the input fields of ingredient and instruction
   arrayChange = (fieldName, index) => (e) => {
@@ -214,11 +216,17 @@ class App extends React.Component {
     })
     .then(res => res.json())
     .then(res => {
-      console.log("new user has been added successfully", res);
+      console.log("new user res:" + res)
+      if( res === true){
+        alert("new user has been added successfully, you may now login");
+      } else {
+        alert("user already exists, please choose a different username");
+      }
+
       /*we use the callback to access push history inside of our edit component.
       We do not have access to our history.push inside the app itself because
       it isn't part of the routing*/
-      callback();
+      /*callback();*/
     });
   }
 
@@ -241,8 +249,9 @@ class App extends React.Component {
       if(this.state.authed === true){
         this.props.history.push('/');
       }else{
-        alert("username/password is incorrect or user doesn't exist");
+        alert("Username and/or password not recognized");
       }
+
 
       /*if(this.state.loginRedirect !== undefined){
         var loginRedirectTemp = this.state.loginRedirect;
@@ -275,7 +284,7 @@ class App extends React.Component {
       <div>
         <Nav logOut={this.logOut} authed={this.state.authed} />
         <Switch>
-          <Route exact path="/" render={(props) => (<Landing {...props} loadRecipes = {this.loadRecipes} recipes={this.state.recipes} />)}/>/>
+          <Route exact path="/" render={(props) => (<Landing {...props} loadRecipes = {this.loadRecipes} recipes={this.state.recipes} searchChange={this.searchChange} />)}/>/>
           <Route path="/login" render={(props) => (<Login {...props} /*loginRedirect={this.state.loginRedirect}*/ addNewUser={this.addNewUser} loginUser={this.loginUser} />)} />
           <Route path="/full/:id" render={(props) => (<FullRecipe {...props} createBlank={this.createBlank} loadRecipe={this.loadRecipe} cur_recipe={this.state.cur_recipe} />)}/>/>
           {/*//wrap routes that require authentication in a component//*/}

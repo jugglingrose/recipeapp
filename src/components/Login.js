@@ -57,6 +57,7 @@ class Login extends React.Component {
     this.setState({ newUser : newUser});
   }
 
+
   render(){
     console.log("Checking props location", this.props.location);
     return (

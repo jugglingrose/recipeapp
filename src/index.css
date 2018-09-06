@@ -225,6 +225,9 @@ i.fa.fa-search::before{
   margin-bottom: 10px;
 }
 
+ul {
+  padding-left: 0px;
+}
 /*-------------------------------------------------------------*/
 /* ADD RECIE PAGE */
 
@@ -412,10 +415,10 @@ textarea{
   }
 
   /*-------------------*/
-  /* LANDING */
+  /* LANDING
   .search-group{
     display: none;
-  }
+  }*/
 
   .recipe-desc{
     font-size: 25px;
@@ -456,10 +459,6 @@ textarea{
   #login-page p{
     margin-top: 20px;
   }
-
-  /*-------------------*/
-  /* FOOTER */
-
 }
 
 /*-------------------------------------------------------------*/
@@ -510,7 +509,6 @@ textarea{
   }
 }
 
-
 /*-------------------------------------------------------------*/
 /*---------------------------------------------------------------*/
 /* IPAD PRO */
@@ -524,12 +522,4 @@ and (min-width: 1024px) and (max-width: 1024px)
     .ing-btn{
       width: 4%;
     }
-
-    /*-------------------*/
-    /* LOGIN PAGE */
-
-    .login-contain{
-      /*padding-top: 25vh;*/
-    }
-
 }
